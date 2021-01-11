@@ -1,0 +1,181 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+*{
+    margin:0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  .wrapper {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-color: white;
+    padding-top: 20px;
+  }
+  
+  header{
+       background-color: #FCE77D;
+       margin-top: auto;
+  }
+  
+  .navbar-nav{
+    li{
+      margin-right: 15px;
+    }
+  }
+  
+  footer{
+      background-color: #FCE77D;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      margin-top: 30px;
+  }
+  
+  .footer-logo{
+    float: right;
+    background: url('../img/logo.jpg');
+    background-size: cover;
+    height: 50px;
+    width: 130px;
+  }
+  
+  .top-btn{
+    color: black;
+    float: right;
+    cursor: pointer;
+    margin: 20px;
+  }
+  
+  .navbar-brand{
+    background: url('../img/logo.jpg');
+    background-size: cover;
+    width: 220px;
+    height: 80px;
+  }
+  
+  a{
+      color: black;
+    &:hover{
+      color: #F96167;
+      text-decoration: underline;
+    }
+  }
+  
+  .form-title{
+      border-bottom: 2px solid #F96167;
+      font-family: impact;
+    font-size: 30px;
+  }
+  
+  .btn-center{
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  .submit-btn{
+    width: 100px;
+    height: 40px;
+  }
+  
+  .submit-btn-sm{
+    width: 60px;
+    height: 32px;
+    font-size: 15px;
+    line-height: 16px;
+  }
+  
+  textarea {
+      padding: 3px;
+  }
+  
+  .recipe-tag{
+    background-color: #ffc107;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  [type="search"] {
+      outline-offset: -2px;
+      -webkit-appearance: auto;
+      height: 1.5em;
+    }
+  
+  .bad-flash{
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .good-flash{
+    color: green;
+    font-family: impact;
+    font-size: 15px;
+  }
+  
+  .font-lg{
+    font-size: 25px;
+  }
+  
+  .font-md{
+    font-size: 18px;
+  }
+  
+  .font-sm{
+    font-size: 15px;
+  }
+  
+  .br-pc {
+    display:block;
+  }
+  .br-tb{
+    display:none;
+  }
+  .br-sp {
+    display:none;
+  }
+  
+  .mr-w{
+    margin: 0 30px;
+  }
+  .hidden-pc{
+    display: none;
+  }
+  
+  .page-item.active .page-link {
+      color: black;
+      background-color: #FCE77D;
+      border-color: #FCE77D;
+  }
+  .page-link {
+      color: black;
+  }
+  .pagination {
+    justify-content: flex-end;
+  }
+  
+  input:focus{
+    border: 1.5px solid #F96167;
+    outline: none;
+    border-radius: 0.2em;
+    padding: 0.5px;
+  }
+  
+  textarea:focus{
+    border: 1.5px solid #F96167;
+    outline: none;
+    border-radius: 0.2em;
+    padding: 2.5px;
+  }
