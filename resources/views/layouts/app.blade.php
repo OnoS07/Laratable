@@ -27,18 +27,39 @@
                 <div class="navbar-brand"></div>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">アバウト</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">マイページ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">レシピ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">レシピ投稿</a>
-                    </li>
+                        @if(Auth::check())
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">アバウト</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('user.show',['id' => Auth::user()->id ])}}" class="nav-link">マイページ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">レシピ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">レシピ投稿</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/logout') }}" class="nav-link">ログアウト</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">アバウト</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">レシピ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/register" class="nav-link">新規登録</a>
+                            </li>
+                            <li>
+                                <a href="/login" class="nav-link">ログイン</a>
+                            </li>
+                            <li>
+                                <a href="/login/guest" class="nav-link">ゲストログイン</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

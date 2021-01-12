@@ -11081,4 +11081,14 @@ textarea:focus {
   padding: 2.5px;
 }
 
+.customer-image {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border: 0.5px solid #F96167;
+  background-color: #F5F5F5;
+}
+
 

@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -34,6 +34,34 @@
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="introduction" class="col-md-4 col-form-label text-md-right">{{ __('Introduction') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="introduction" type="text" class="form-control @error('introduction') is-invalid @enderror" name="introduction" value="{{ old('introduction') }}" required autocomplete="introduction"></textarea>
+
+                                @error('introduction')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $introduction }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="profile_img" class="col-md-4 col-form-label text-md-right">{{ __('Profile') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="profile_img" type="file" @error('profile_img') is-invalid @enderror" name="profile_img">
+
+                                @error('profile_img')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $profile_img }}</strong>
                                     </span>
                                 @enderror
                             </div>
