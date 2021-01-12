@@ -19,11 +19,14 @@ class Recipe extends Model
 
     #リレーションを作成
     public function ingredients(){
-        return $this->hasMany('App\Model\Ingredient');
+        return $this->hasMany('App\Models\Ingredient');
     }
 
     public function cookings(){
-        return $this->hasMany('App\Model\Cooking');
+        return $this->hasMany('App\Models\Cooking');
     }
 
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }

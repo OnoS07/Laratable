@@ -24,7 +24,9 @@
     <div class="wrapper">
         <header class="navbar navbar-expand-lg navbar-white fixed-top">
             <div class="container">
-                <div class="navbar-brand"></div>
+                <div>
+                    <a href="/" class="navbar-brand"></a>
+                </div>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         @if(Auth::check())
@@ -35,7 +37,7 @@
                                 <a href="{{route('user.show',['id' => Auth::user()->id ])}}" class="nav-link">マイページ</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/" class="nav-link">レシピ</a>
+                                <a href="/recipe/index" class="nav-link">レシピ</a>
                             </li>
                             <li class="nav-item">
                                 <a href="/" class="nav-link">レシピ投稿</a>

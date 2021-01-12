@@ -21,10 +21,13 @@
         "postcss": "^8.1.14",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "resolve-url-loader": "^2.3.1",
+        "resolve-url-loader": "^3.1.2",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "vue-loader": "^15.9.6"
     },
-    "name": "laratable"
+    "name": "laratable",
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.1"
+    }
 }

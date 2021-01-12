@@ -48,4 +48,8 @@ class User extends Authenticatable
         'name' => 'required|max:10',
         'introduction' => 'required|max:200',
     );
+
+    public function recipes(){
+        return $this->hasMany('App\Models\Recipe');
+    }
 }

@@ -13,6 +13,6 @@ class Cooking extends Model
     );
 
     public function recipe(){
-        $this->belongsTo('App\Model\Recipe');
+        return $this->belongsTo('App\Models\Recipe');
     }
 }

@@ -25,3 +25,11 @@ Route::get('about', 'App\Http\Controllers\TopController@about');
 Route::get('user/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
 Route::get('user/edit/{id}', 'App\Http\Controllers\UserController@edit')->name('user.edit');
 Route::post('user/update/', 'App\Http\Controllers\UserController@update')->name('user.update');;
+
+Route::get('recipe/index', 'App\Http\Controllers\RecipeController@index')->name('recipe.index');
+Route::get('recipe/{id}', 'App\Http\Controllers\RecipeController@show')->name('recipe.show');
+Route::get('recipe/edit/{id}', 'App\Http\Controllers\RecipeController@edit')->name('recipe.edit');
+
+Route::get('ingredient/edit/{id}', 'App\Http\Controllers\IngredientController@edit')->name('ingredient.edit');
+
+Route::get('cooking/edit/{id}', 'App\Http\Controllers\CookingController@edit')->name('cooking.edit');
