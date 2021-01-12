@@ -24,7 +24,9 @@
     <div class="wrapper">
         <header class="navbar navbar-expand-lg navbar-white fixed-top">
             <div class="container">
-                <div class="navbar-brand"></div>
+                <div>
+                    <a href="/" class="navbar-brand"></a>
+                </div>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         @if(Auth::check())
