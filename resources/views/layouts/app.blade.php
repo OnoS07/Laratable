@@ -32,7 +32,7 @@
                                 <a href="/" class="nav-link">アバウト</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/" class="nav-link">マイページ</a>
+                                <a href="{{route('user.show',['id' => Auth::user()->id ])}}" class="nav-link">マイページ</a>
                             </li>
                             <li class="nav-item">
                                 <a href="/" class="nav-link">レシピ</a>
@@ -65,9 +65,7 @@
             </div>
         </header>
         <div class="content">
-            <div class="container">
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
         <footer>
             <div class="container">

@@ -46,7 +46,7 @@ class LoginController extends Controller
 
     public function guestLogin(){
     if (Auth::attempt(['email' => 'test@test', 'password' => 'testtest'])) {
-        return redirect('/home');
+        return redirect('/');
     }
 
     return redirect('/');
