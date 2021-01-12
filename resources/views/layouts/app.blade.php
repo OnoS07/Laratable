@@ -37,7 +37,7 @@
                                 <a href="{{route('user.show',['id' => Auth::user()->id ])}}" class="nav-link">マイページ</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/" class="nav-link">レシピ</a>
+                                <a href="/recipe/index" class="nav-link">レシピ</a>
                             </li>
                             <li class="nav-item">
                                 <a href="/" class="nav-link">レシピ投稿</a>

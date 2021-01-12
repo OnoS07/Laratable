@@ -7,6 +7,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
 *{
     margin:0;
     padding: 0;
@@ -188,3 +193,71 @@
     border: 0.5px solid #F96167;
     background-color: #F5F5F5
   }
+
+
+.recipe-contents{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.recipe-content{
+  width: 28%;
+  margin: 15px 2.5%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #F96167;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fffefc;
+
+  margin: 15px;
+  float: left;
+  visibility: hidden;
+
+  box-shadow: 3px 3px 3px 3px #faebd7;
+}
+
+.recipe-image{
+  width: 100%;
+  margin: 0 0;
+  height: 220px;
+  background-color: #F5F5F5;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.recipe-image-show{
+  width: 100%;
+  height: 405px;
+  margin: 0 0;
+  background-color: #F5F5F5;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.recipe-intro{
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 2%;
+  padding: 3%;
+  display: none;
+}
+
+.recipe-show{
+  width: 90%;
+  margin: 0 5%;
+}
+
+.comment-image{
+	border-radius: 50%;
+	height: 80px;
+	width: 80px;
+	object-fit: contain;
+	border: 0.5px solid #F96167;
+	background-color: #F5F5F5
+}
