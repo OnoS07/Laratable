@@ -8,11 +8,27 @@
     <span style="margin-left: 10px;font-size: 15px; padding-top: 20px;">
         <a href="{{route('user.show',['id' => Auth::user()->id ])}}">>back</a>
     </span>
-    <form action='{{route('user.update')}}' method="post">
+    <form action='{{route('user.update')}}' method="post" enctype='multipart/form-data'>
         @csrf
         <input type="hidden" name="id" value="{{$user->id}}">
         <div class="row" style="margin-top: 30px;">
             <div class="col-lg-4 col-12" style="text-align: center;">
+                @if($user->profile_img)
+                    <img src="{{ asset('storage/'.$user->profile_img)}}" class="customer-image" id="img">
+                @else
+                    <img src="{{ asset('/img/logo.jpg') }}" class="customer-image" id="img">
+                @endif
+                <input type="file" name="profile_img" onchange="previewImage(this);"></input>
+                <script>
+                    function previewImage(obj)
+                    {
+                      var fileReader = new FileReader();
+                      fileReader.onload = (function() {
+                        document.getElementById('img').src = fileReader.result;
+                      });
+                      fileReader.readAsDataURL(obj.files[0]);
+                    }
+                  </script>
             </div>
 
             <div class="col-lg-8 col-12">

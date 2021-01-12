@@ -12,8 +12,12 @@
 		@endif
 	</span>
 	<div class="row" style="margin-top: 30px;">
-		<div class="col-lg-4 col-12" style="text-align: center;">
-            <img src="{{ asset('/img/logo.jpg') }}" class="customer-image">
+        <div class="col-lg-4 col-12" style="text-align: center;">
+            @if($user->profile_img)
+                <img src="{{ asset('storage/'.$user->profile_img)}}" class="customer-image">
+            @else
+                <img src="{{ asset('/img/logo.jpg') }}" class="customer-image">
+            @endif
 		</div>
 		<div class="col-lg-8 col-12">
 			<table class="table table-bordered">
