@@ -19,61 +19,58 @@ class RecipeController extends Controller
         return view('recipe.show', ['recipe' => $recipe]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit(Request $request)
     {
-        //
+        $recipe = Recipe::find($request->id);
+        return view('recipe.edit', ['recipe' => $recipe]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function update(Request $request)
+    {
+        $this->validate($request, Recipe::$rules);
+        $recipe = Recipe::find($request->id);
+        $recipe->title = $request->title;
+        $recipe->introduction = $request->introduction;
+        $recipe->amount = $request->amount;
+
+        if($request->recipe_img){
+            $filename = $request->file('recipe_img')->store('public');
+            $recipe->recipe_img = str_replace('public/','',$filename); 
+        }
+
+        $recipe->save();
+        return redirect()->route('recipe.show', ['id'=>$recipe]);
+    }
+
+    public function create(Request $request)
+    {
+        return view('recipe.create');
+    }
+
     public function store(Request $request)
     {
-        //
+        $this->validate($request, Recipe::$rules);
+        $recipe = new Recipe;
+        $recipe->user_id = $request->user_id;
+        $recipe->title = $request->title;
+        $recipe->introduction = $request->introduction;
+        $recipe->amount = $request->amount;
+
+        if($request->recipe_img){
+            $filename = $request->file('recipe_img')->store('public');
+            $recipe->recipe_img = str_replace('public/','',$filename);
+        }else{
+            $recipe->recipe_img = "";
+        }
+
+        $recipe->save();
+        return redirect()->route('ingredient.edit', ['id'=>$recipe]);
     }
 
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function destroy(Request $request)
     {
-        //
-    }
+        $recipe = Recipe::find($request->id)->delete();
+        return redirect()->route('recipe.index');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

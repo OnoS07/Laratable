@@ -1904,6 +1904,15 @@ $("#close-recipe").click(function () {
 $("#open-recipe").click(function () {
   $(".open-recipe-contents").slideToggle("slow");
 });
+$('#select-image').on('change', function (e) {
+  var reader = new FileReader();
+
+  reader.onload = function (e) {
+    $("#preview-image").attr('src', e.target.result);
+  };
+
+  reader.readAsDataURL(e.target.files[0]);
+});
 
 /***/ }),
 

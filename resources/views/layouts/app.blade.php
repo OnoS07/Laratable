@@ -31,7 +31,7 @@
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         @if(Auth::check())
                             <li class="nav-item">
-                                <a href="/" class="nav-link">アバウト</a>
+                                <a href="/about" class="nav-link">アバウト</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('user.show',['id' => Auth::user()->id ])}}" class="nav-link">マイページ</a>
@@ -40,7 +40,7 @@
                                 <a href="/recipe/index" class="nav-link">レシピ</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/" class="nav-link">レシピ投稿</a>
+                                <a href="/recipe/create" class="nav-link">レシピ投稿</a>
                             </li>
                             <li>
                                 <a href="{{ url('/logout') }}" class="nav-link">ログアウト</a>
