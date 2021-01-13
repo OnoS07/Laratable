@@ -71,6 +71,5 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::find($request->id)->delete();
         return redirect()->route('recipe.index');
-
     }
 }

@@ -13,4 +13,32 @@ class IngredientController extends Controller
         $recipe = Recipe::find($request->id);
         return view('ingredient.edit', ['recipe'=>$recipe]);
     }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, Ingredient::$rules);
+        $ingredient = Ingredient::find($request->id);
+        $ingredient->content = $request->content;
+        $ingredient->amount = $request->amount;
+        $ingredient->save();
+        return redirect()->route('ingredient.edit', ['id'=>$ingredient->recipe_id]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, Ingredient::$rules);
+        $ingredient = new Ingredient;
+        $ingredient->recipe_id = $request->recipe_id;
+        $ingredient->content = $request->content;
+        $ingredient->amount = $request->amount;
+        $ingredient->save();
+        return redirect()->route('ingredient.edit', ['id'=>$ingredient->recipe_id]);
+    }
+
+    public function destroy(Request $request)
+    {
+        $ingredient = Ingredient::find($request->id)->delete();
+        return redirect()->route('ingredient.edit', ['id'=>$ingredient]);
+    }
 }
+
