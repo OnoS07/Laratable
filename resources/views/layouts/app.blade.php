@@ -47,10 +47,10 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="/" class="nav-link">アバウト</a>
+                                <a href="/about" class="nav-link">アバウト</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/" class="nav-link">レシピ</a>
+                                <a href="/recipe/index" class="nav-link">レシピ</a>
                             </li>
                             <li class="nav-item">
                                 <a href="/register" class="nav-link">新規登録</a>

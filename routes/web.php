@@ -19,8 +19,8 @@ Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name(
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('login/guest', '\App\Http\Controllers\Auth\LoginController@guestLogin');
 
-Route::get('/', 'App\Http\Controllers\TopController@home');
-Route::get('about', 'App\Http\Controllers\TopController@about');
+Route::get('/', 'App\Http\Controllers\TopController@main')->name('top.main');
+Route::get('about', 'App\Http\Controllers\TopController@about')->name('top.about');
 
 Route::get('user/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
 Route::get('user/edit/{id}', 'App\Http\Controllers\UserController@edit')->name('user.edit');
