@@ -29,6 +29,9 @@ Route::post('user/update/', 'App\Http\Controllers\UserController@update')->name(
 Route::get('recipe/index', 'App\Http\Controllers\RecipeController@index')->name('recipe.index');
 Route::get('recipe/{id}', 'App\Http\Controllers\RecipeController@show')->name('recipe.show');
 Route::get('recipe/edit/{id}', 'App\Http\Controllers\RecipeController@edit')->name('recipe.edit');
+Route::post('recipe/update/', 'App\Http\Controllers\RecipeController@update')->name('recipe.update');
+Route::get('recipe/create/', 'App\Http\Controllers\RecipeController@create')->name('recipe.create');
+Route::post('recipe/store/', 'App\Http\Controllers\RecipeController@store')->name('recipe.store');
 
 Route::get('ingredient/edit/{id}', 'App\Http\Controllers\IngredientController@edit')->name('ingredient.edit');
 

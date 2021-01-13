@@ -14,7 +14,7 @@
 				@endif
             @endif
             @if($recipe->recipe_img)
-                <img src="{{asset('strage/' . $recipe->recipe_img)}}" class="recipe-image-show" style="margin:10px 0;">
+                <img src="{{asset('storage/'.$recipe->recipe_img)}}" class="recipe-image-show" style="margin:10px 0;">
             @else
                 <img src="{{asset('/img/logo.jpg') }}" class="recipe-image-show" style="margin:10px 0;">
             @endif
