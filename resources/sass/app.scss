@@ -261,3 +261,120 @@
 	border: 0.5px solid #F96167;
 	background-color: #F5F5F5
 }
+
+
+.product-contents{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.product-content{
+	width: 21%;
+	margin: 0 2%;
+	display: flex;
+	flex-direction: column;
+
+	  margin: 15px;
+	  float: left;
+	  visibility: hidden;
+}
+
+.product-image{
+	height: auto;
+	width: 100%;
+	margin: 0 0;
+    border-radius: 5px;
+	box-shadow: 2px 2px 2px 2px #faebd7;
+}
+
+.product-show{
+	width: 100%;
+	border-radius: 5px;
+}
+
+.genres{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.genre_name{
+	background-color: white;
+	border:0px solid black;
+	cursor: pointer;
+	padding-bottom: 3px;
+	&:hover{
+		color: #F96167;
+		text-decoration: underline;
+	}
+}
+.top-images{
+	width: 100%;
+	margin: 0 auto;
+	height: 500px;
+}
+
+.top1{
+  background: url('../img/top_page1.jpg');
+  background-position: 0 -50px;
+  background-size: cover;
+  height: 500px;
+	display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.top-image-text{
+    font-size: 70px;
+    color: white;
+    margin-bottom: 50px;
+    font-family: impact
+}
+
+.top-contents{
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 100px;
+}
+
+.top-content{
+	width: 333px;
+	display: flex;
+	height: 200px;
+}
+
+.top-content-text{
+    text-align: center;
+    margin: auto auto;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: impact;
+    text-shadow: 1px 1px black;
+
+	span{
+	color: white;
+	}
+}
+
+.top-about{
+  background: url('../img/logo.jpg');
+	background-size: cover;
+}
+
+.top-recipe{
+  background: url('../img/top_recipe.jpeg');
+	background-size: cover;
+}
+
+.top-vegetable{
+  background: url('../img/top_vegetable.jpg');
+	background-size: cover;
+}
+
+.about-content{
+	margin-top: 70px;
+	border-bottom: 1px solid #F96167;
+	padding-bottom: 10px;
+}
+
+
