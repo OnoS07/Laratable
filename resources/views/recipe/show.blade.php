@@ -14,7 +14,7 @@
                         <form action="{{route('recipe.destroy')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$recipe->id}}">
-                            <input type="submit" value="レシピを削除する" class="btn btn-danger btn-sm">
+                            <input type="submit" value="レシピを削除する" class="btn btn-danger btn-submit-sm">
                         </form>
                     </span>
 				@endif
@@ -37,8 +37,7 @@
 		</div>
 
 		<div class="col-lg-6 col-12">
-            <p style="border-bottom: 1px solid #F96167; font-size: 20px; font-weight: bold">
-                {{$recipe->title}}
+            <p style="border-bottom: 1px solid #F96167; font-size: 20px; font-weight: bold">{{$recipe->title}}
                 @if(Auth::check())
                     @if($recipe->user == Auth::user())
                         <a href="{{route('recipe.edit', ['id'=>$recipe->user])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
@@ -58,7 +57,7 @@
             <p style="border-bottom: 1px solid #F96167; font-size: 20px;margin-top:20px" >材料
                 @if(Auth::check())
                     @if($recipe->user == Auth::user())
-                        <a href="/" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
+                        <a href="{{route('ingredient.edit', ['id'=>$recipe])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
                     @endif
                 @endif
             </p>
@@ -80,7 +79,7 @@
             <p style="border-bottom: 1px solid #F96167; font-size: 20px" >作り方
                 @if(Auth::check())
                     @if($recipe->user == Auth::user())
-                        <a href="/" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
+                        <a href="{{route('cooking.edit', ['id'=>$recipe])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
                     @endif
                 @endif
             </p>
@@ -96,7 +95,5 @@
 			@endforeach
 		</div>
 	</div>
-
 </div>
-
 @endsection

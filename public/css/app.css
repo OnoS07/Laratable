@@ -16187,6 +16187,11 @@ a:hover {
   line-height: 16px;
 }
 
+.btn-sm, .btn-group-sm > .btn {
+  width: 50px;
+  height: 28px;
+}
+
 textarea {
   padding: 3px;
 }
