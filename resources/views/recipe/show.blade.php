@@ -10,7 +10,13 @@
 		<div class="col-lg-6 col-12">
             @if(Auth::check())
                 @if($recipe->user == Auth::user())
-                    <a href="/" class="btn btn-danger btn-sm">レシピを削除する</a>
+                    <span style="float: right">
+                        <form action="{{route('recipe.destroy')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$recipe->id}}">
+                            <input type="submit" value="レシピを削除する" class="btn btn-danger btn-sm">
+                        </form>
+                    </span>
 				@endif
             @endif
             @if($recipe->recipe_img)

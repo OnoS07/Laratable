@@ -31,51 +31,46 @@ class RecipeController extends Controller
         $recipe = Recipe::find($request->id);
         $recipe->title = $request->title;
         $recipe->introduction = $request->introduction;
-        $recipe->amount = $recipe->amount;
+        $recipe->amount = $request->amount;
 
         if($request->recipe_img){
-            $filename = $request->file('recipe_img')->store('public'); // publicフォルダに保存
-            $recipe->recipe_img = str_replace('public/','',$filename); // 保存するファイル名からpublicを除外
+            $filename = $request->file('recipe_img')->store('public');
+            $recipe->recipe_img = str_replace('public/','',$filename); 
         }
 
         $recipe->save();
         return redirect()->route('recipe.show', ['id'=>$recipe]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('recipe.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, Recipe::$rules);
+        $recipe = new Recipe;
+        $recipe->user_id = $request->user_id;
+        $recipe->title = $request->title;
+        $recipe->introduction = $request->introduction;
+        $recipe->amount = $request->amount;
+
+        if($request->recipe_img){
+            $filename = $request->file('recipe_img')->store('public');
+            $recipe->recipe_img = str_replace('public/','',$filename);
+        }else{
+            $recipe->recipe_img = "";
+        }
+
+        $recipe->save();
+        return redirect()->route('ingredient.edit', ['id'=>$recipe]);
     }
 
-
-
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $recipe = Recipe::find($request->id)->delete();
+        return redirect()->route('recipe.index');
+
     }
 }
