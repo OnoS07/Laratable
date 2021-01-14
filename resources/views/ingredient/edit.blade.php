@@ -13,7 +13,7 @@
 		</div>
 		<div class="col-lg-6 col-12">
 			<p style="border-bottom: 1px solid silver; font-size: 20px" >レシピ
-                <a href="{{route('recipe.edit', ['id'=>$recipe->user])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
+                <a href="{{route('recipe.edit', ['id'=>$recipe])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
 			</p>
 			<div class="row">
 				<div class="col-lg-3 col-3"><p>レシピ名</p></div>
