@@ -43,3 +43,6 @@ Route::get('recipe/{id}/cookings/edit', 'App\Http\Controllers\CookingController@
 Route::post('cooking/store', 'App\Http\Controllers\CookingController@store')->name('cooking.store');
 Route::post('cooking/update', 'App\Http\Controllers\CookingController@update')->name('cooking.update');
 Route::post('cooking/destroy', 'App\Http\Controllers\CookingController@destroy')->name('cooking.destroy');
+
+Route::post('comment/store', 'App\Http\Controllers\CommentController@store')->name('comment.store');
+Route::post('comment/destroy', 'App\Http\Controllers\CommentController@destroy')->name('comment.destroy');
