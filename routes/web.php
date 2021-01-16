@@ -40,6 +40,6 @@ Route::post('ingredient/store', 'App\Http\Controllers\IngredientController@store
 Route::post('ingredient/destroy', 'App\Http\Controllers\IngredientController@destroy')->name('ingredient.destroy');
 
 Route::get('recipe/{id}/cookings/edit', 'App\Http\Controllers\CookingController@edit')->name('cooking.edit');
-Route::post('cooking/update', 'App\Http\Controllers\CookingController@update')->name('cooking.update');
 Route::post('cooking/store', 'App\Http\Controllers\CookingController@store')->name('cooking.store');
+Route::post('cooking/update', 'App\Http\Controllers\CookingController@update')->name('cooking.update');
 Route::post('cooking/destroy', 'App\Http\Controllers\CookingController@destroy')->name('cooking.destroy');

@@ -56,16 +56,19 @@
                         <div class="col-lg-9 col-10">
                             <textarea name="content" rows="2" style="width:100%">{{$cooking->content}}</textarea>
                         </div>
-                        <div class="col-lg-2 col-12" style="text-align: right">
+                        <div class="col-lg-1 col-12">
                             <input type="submit" value="変更" class="btn btn-warning btn-sm">
+                        </div>
+                </form>
+                        <div class="col-lg-1 col-12">
                                 <form action="{{route('cooking.destroy', ['id'=>$cooking])}}" method="post">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$cooking->id}}">
+                                    <input type="hidden" name="recipe_id" value="{{$cooking->recipe_id}}">
                                     <input type="submit" value="削除" class="btn btn-danger btn-sm">
                                 </form>
                         </div>
                     </div>
-                </form>
             @endforeach
             <form action="{{route('cooking.store')}}" method="post">
                 @csrf
