@@ -37,8 +37,9 @@ class IngredientController extends Controller
 
     public function destroy(Request $request)
     {
+        $recipe = Recipe::find($request->recipe_id);
         $ingredient = Ingredient::find($request->id)->delete();
-        return redirect()->route('ingredient.edit', ['id'=>$ingredient]);
+        return redirect()->route('ingredient.edit', ['id'=>$recipe]);
     }
 }
 

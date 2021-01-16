@@ -44,10 +44,12 @@
                         <div class="col-lg-2 col-2">
                             <input type="submit" value="変更" class="btn btn-warning btn-sm">
                         </div>
+                </form>
                         <div class="col-lg-2 col-2">
                         <form action="{{route('ingredient.destroy')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$ingredient->id}}">
+                            <input type="hidden" name="recipe_id" value="{{$ingredient->recipe_id}}">
                             <input type="submit" value="削除" class="btn btn-danger btn-sm">
                         </form>
                         </div>

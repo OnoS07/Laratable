@@ -35,8 +35,9 @@ class CookingController extends Controller
 
     public function destroy(Request $request)
     {
+        $recipe = Recipe::find($request->recipe_id);
         $cooking = Cooking::find($request->id)->delete();
-        return redirect()->route('cooking.edit', ['id'=>$cooking]);
+        return redirect()->route('cooking.edit', ['id'=>$recipe]);
     }
 }
 
