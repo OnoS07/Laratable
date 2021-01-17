@@ -36,9 +36,43 @@
                             <i class="fas fa-comment" style="color: #F96167;"></i>
                                 <span style="color: black">{{count($recipe->comments)}}件</span>
                     </span>
-                    <span><i class="fas fa-calendar-alt" style="color: #F96167"></i>
-                        {{$recipe->created_at->format('Y/m/d')}}
-                    </span>
+                    @if(Auth::check())
+                        <span class="mr-w">
+                            @if(!$recipe->favorited_by())
+                                <form action="{{route('favorite.store')}}" method="post" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="recipe_id" value="{{$recipe->id}}">
+                                    <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                                    <input type="submit" value="&#xf004;" class="fas" style="border: none; background-color: white;">
+                                </form>
+                                    <span>{{count($recipe->favorites)}}</span>
+                            @else
+                                <form action="{{route('favorite.destroy')}}" method="post" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="recipe_id" value="{{$recipe->id}}">
+                                    <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                                    <input type="submit" value="&#xf004;" class="fas" style="color: #F96167;border: none; background-color: white;">
+                                </form>
+                                    <span>{{count($recipe->favorites)}}</span>
+                            @endif
+                        </span>
+                        <span><i class="fas fa-calendar-alt" style="color: #F96167"></i>
+                            {{$recipe->created_at->format('Y/m/d')}}
+                        </span>
+                    @else
+                        <span class="mr-w">
+                            <i class="fas fa-heart" style="color: #F96167"></i>
+                            <span style="color:black">{{count($recipe->favorites)}}</span>
+                        </span>
+                        <span><i class="fas fa-calendar-alt" style="color: #F96167"></i>
+                            {{$recipe->created_at->format('Y/m/d')}}
+                        </span>
+                        <p style="margin-top: 10px" class="font-sm">
+                            <a href="/register">新規登録</a>、または<a href="/login">ログイン</a>いただくと<br>
+                            自分のレシピの作成やコメント、いいねができます。
+                        </p>
+                        <p></p>
+                    @endif
                 </span>
 			</div>
 		</div>

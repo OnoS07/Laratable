@@ -31,12 +31,13 @@
 									<i class="fas fa-user" style="color: #F96167"></i>
 									<span style="color: black">{{$recipe->user->name}}</span>
                                 </a>
-                                <span class="mr-w">
+                                <span style="margin: 0 30px;">
                                     <i class="fas fa-comment" style="color: #F96167;"></i>
                                         <span style="color: black">{{count($recipe->comments)}}件</span>
                                 </span>
-                                <span><i class="fas fa-calendar-alt" style="color: #F96167"></i>
-                                    {{$recipe->created_at->format('Y/m/d')}}
+                                <i class="fas fa-heart" style="color: #F96167"></i>
+                                <span style="color:black">
+                                    {{count($recipe->favorites)}}
                                 </span>
 							</span>
 					</div>
