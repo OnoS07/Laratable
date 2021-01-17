@@ -46,3 +46,6 @@ Route::post('cooking/destroy', 'App\Http\Controllers\CookingController@destroy')
 
 Route::post('comment/store', 'App\Http\Controllers\CommentController@store')->name('comment.store');
 Route::post('comment/destroy', 'App\Http\Controllers\CommentController@destroy')->name('comment.destroy');
+
+Route::post('favorite/store', 'App\Http\Controllers\FavoriteController@store')->name('favorite.store');
+Route::post('favorite/destroy', 'App\Http\Controllers\FavoriteController@destroy')->name('favorite.destroy');
