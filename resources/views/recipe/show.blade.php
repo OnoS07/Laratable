@@ -40,7 +40,6 @@
                 <img src="{{asset('/img/logo.jpg') }}" class="recipe-image-show" style="margin:10px 0;">
             @endif
             <div style="margin-top: 20px;">
-                {{$recipe->recipe_status}}
 				<span class="font-md">
                     <a href="{{route('user.show', ['id'=>$recipe->user])}}">
 						<i class="fas fa-user" style="color: #F96167"></i>
@@ -154,7 +153,8 @@
     </div>
     
     <div style="margin-top:30px;" id="comments">
-        <span class="form-title" >Comments</span>
+        @if($recipe->recipe_status == 'open')
+            <span class="form-title" >Comments</span>
             @foreach($recipe->comments as $comment)
                 <div style="margin: 10px 0">
                     <div class="row">
@@ -209,7 +209,8 @@
                         </form>
 					</div>
 				</div>
-			@endif
+            @endif
+        @endif
     </div>
 
 </div>

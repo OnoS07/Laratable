@@ -34,7 +34,7 @@ class CookingController extends Controller
         if($cooking->save()){
             if($recipe->recipe_status == 'ingredient'){
                 $recipe->update(['recipe_status' => 'cooking']);
-            }elseif($recipe->recipe_status == 'empty' && $recipe->ingredients->exists()){
+            }elseif($recipe->recipe_status == 'empty' && isset($recipe->ingredients)){
                 $recipe->update(['recipe_status' => 'close']);
             }
         }

@@ -9,7 +9,7 @@ class TopController extends Controller
 {
     public function main()
     {
-        $recipes = Recipe::inRandomOrder()->take(3)->get();
+        $recipes = Recipe::where('recipe_status', 'open')->inRandomOrder()->take(3)->get();
         return view('top.main', ['recipes'=>$recipes]);
     }
 

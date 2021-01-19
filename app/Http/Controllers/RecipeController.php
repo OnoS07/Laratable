@@ -10,7 +10,7 @@ class RecipeController extends Controller
 {
     public function index(Request $request)
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::where('recipe_status', 'open')->get();
         return view('recipe.index', ['recipes' => $recipes]);
     }
 
