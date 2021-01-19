@@ -10,6 +10,21 @@
 		<div class="col-lg-6 col-12">
             @if(Auth::check())
                 @if($recipe->user == Auth::user())
+                    @if($recipe->recipe_status == 'close')
+                        <form action="{{route('recipe.update', ['id'=>$recipe])}}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$recipe->id}}">
+                            <input type="hidden" name="recipe_status" value="open">
+                            <input type="submit" value="公開する" class="btn btn-warning submit-btn" >
+                        </form>
+                    @elseif($recipe->recipe_status == 'open')
+                        <form action="{{route('recipe.update', ['id'=>$recipe])}}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$recipe->id}}">
+                            <input type="hidden" name="recipe_status" value="close">
+                            <input type="submit" value="公開しない" class="btn btn-warning submit-btn" >
+                        </form>
+                    @endif
                     <span style="float: right">
                         <form action="{{route('recipe.destroy')}}" method="post">
                             @csrf
@@ -24,7 +39,8 @@
             @else
                 <img src="{{asset('/img/logo.jpg') }}" class="recipe-image-show" style="margin:10px 0;">
             @endif
-			<div style="margin-top: 20px;">
+            <div style="margin-top: 20px;">
+                {{$recipe->recipe_status}}
 				<span class="font-md">
                     <a href="{{route('user.show', ['id'=>$recipe->user])}}">
 						<i class="fas fa-user" style="color: #F96167"></i>

@@ -26,19 +26,35 @@ class IngredientController extends Controller
 
     public function store(Request $request)
     {
+        $recipe = Recipe::find($request->recipe_id);
         $this->validate($request, Ingredient::$rules);
         $ingredient = new Ingredient;
         $ingredient->recipe_id = $request->recipe_id;
         $ingredient->content = $request->content;
         $ingredient->amount = $request->amount;
-        $ingredient->save();
+
+        if($ingredient->save()){
+            if($recipe->recipe_status == 'recipe'){
+                $recipe->update(['recipe_status' => 'ingredient']);
+            }elseif($recipe->recipe_status == 'empty' && isset($recipe->cookings)){
+                $recipe->update(['recipe_status' => 'close']);
+            }
+        }
+
         return redirect()->route('ingredient.edit', ['id'=>$ingredient->recipe_id]);
     }
 
     public function destroy(Request $request)
     {
         $recipe = Recipe::find($request->recipe_id);
-        $ingredient = Ingredient::find($request->id)->delete();
+        $ingredient = Ingredient::find($request->id);
+        if($ingredient->delete()){
+            if(isset($recipe->ingredients)){
+                if($recipe->recipe_status == 'open' || $recipe->recipe_status == 'close'){
+                    $recipe->update(['recipe_status' => 'empty']);
+                }
+            }
+        }
         return redirect()->route('ingredient.edit', ['id'=>$recipe]);
     }
 }

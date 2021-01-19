@@ -12,9 +12,9 @@ use BenSampo\Enum\Enum;
 final class RecipeStatus extends Enum
 {
     # レシピ作成済み
-    const RECIPE =   'recipe';
+    const RECIPE = 'recipe';
     #材料入力済み
-    const INGREDIENT =   'ingredient';
+    const INGREDIENT = 'ingredient';
     #作り方入力済み
     const COOKING = 'cooking';
     #公開中
