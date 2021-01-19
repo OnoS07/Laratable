@@ -25,19 +25,35 @@ class CookingController extends Controller
 
     public function store(Request $request)
     {
+        $recipe = Recipe::find($request->recipe_id);
         $this->validate($request, Cooking::$rules);
         $cooking = new Cooking;
         $cooking->recipe_id = $request->recipe_id;
         $cooking->content = $request->content;
-        $cooking->save();
+
+        if($cooking->save()){
+            if($recipe->recipe_status == 'ingredient'){
+                $recipe->update(['recipe_status' => 'cooking']);
+            }elseif($recipe->recipe_status == 'empty' && isset($recipe->ingredients)){
+                $recipe->update(['recipe_status' => 'close']);
+            }
+        }
+
         return redirect()->route('cooking.edit', ['id'=>$cooking->recipe_id]);
     }
 
     public function destroy(Request $request)
     {
         $recipe = Recipe::find($request->recipe_id);
-        $cooking = Cooking::find($request->id)->delete();
-        return redirect()->route('cooking.edit', ['id'=>$recipe]);
+        $cooking = Cooking::find($request->id);
+        if($cooking->delete()){
+            if(isset($recipe->cookings)){
+                if($recipe->recipe_status == 'open' || $recipe->recipe_status == 'close'){
+                    $recipe->update(['recipe_status' => 'empty']);
+                }
+            }
+        }
+        return redirect()->route('ingredient.edit', ['id'=>$recipe]);
     }
 }
 

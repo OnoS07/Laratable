@@ -72,11 +72,18 @@
             </form>
 
 			<div style="text-align: center; margin-top: 30px;">
-                @if(empty($recipe->cookings))
-                    <a href="{{route('cooking.edit', ['id'=>$recipe])}}" class="btn btn-warning">作り方を入力する</a>
-                @else
+                @if($recipe->cookings->isEmpty())
+                    <a href="{{route('cooking.edit', ['id'=>$recipe])}}" class="btn btn-warning">保存する</a>
+                @elseif($recipe->recipe_status == 'open' || $recipe->recipe_status == 'empty' || $recipe->recipe_status == 'close')
                     <a href="{{route('recipe.show', ['id'=>$recipe])}}" class="btn btn-warning">戻る</a>
-				@endif
+                @else
+                    <form action="{{route('recipe.update', ['id'=>$recipe])}}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$recipe->id}}">
+                        <input type="hidden" name="recipe_status" value="open">
+                        <input type="submit" value="レシピを投稿する" class="btn btn-warning" style="padding: 5px 30px">
+                    </form>
+                @endif
 			</div>
 
 		</div>

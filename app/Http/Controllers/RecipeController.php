@@ -10,7 +10,7 @@ class RecipeController extends Controller
 {
     public function index(Request $request)
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::where('recipe_status', 'open')->get();
         return view('recipe.index', ['recipes' => $recipes]);
     }
 
@@ -28,19 +28,30 @@ class RecipeController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, Recipe::$rules);
         $recipe = Recipe::find($request->id);
-        $recipe->title = $request->title;
-        $recipe->introduction = $request->introduction;
-        $recipe->amount = $request->amount;
-
-        if($request->recipe_img){
-            $filename = $request->file('recipe_img')->store('public');
-            $recipe->recipe_img = str_replace('public/','',$filename); 
+        if($request->recipe_status){
+            if($recipe->ingredients->isEmpty()){
+                return redirect()->route('recipe.show', ['id'=>$recipe]);
+            }elseif($recipe->cookings->isEmpty()){
+                return redirect()->route('recipe.show', ['id'=>$recipe]);
+            }else{
+                $recipe->update(['recipe_status' => $request->recipe_status]);
+                return redirect()->route('recipe.show', ['id'=>$recipe]);
+            }
+        }else{
+            $this->validate($request, Recipe::$rules);
+            $recipe->title = $request->title;
+            $recipe->introduction = $request->introduction;
+            $recipe->amount = $request->amount;
+    
+            if($request->recipe_img){
+                $filename = $request->file('recipe_img')->store('public');
+                $recipe->recipe_img = str_replace('public/','',$filename); 
+            }
+    
+            $recipe->save();
+            return redirect()->route('recipe.show', ['id'=>$recipe]);
         }
-
-        $recipe->save();
-        return redirect()->route('recipe.show', ['id'=>$recipe]);
     }
 
     public function create(Request $request)
