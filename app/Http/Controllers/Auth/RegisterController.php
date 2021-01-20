@@ -76,6 +76,7 @@ class RegisterController extends Controller
 
     public function redirectPath()
     {
+        session()->flash('flash_notice', '新規登録できました');
         return '/';
     }
 }

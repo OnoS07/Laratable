@@ -20,6 +20,9 @@
             @endif
 		</div>
 		<div class="col-lg-8 col-12">
+			@if(session('flash_update'))
+				<div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_update')}}</div> 
+			@endif
 			<table class="table table-bordered">
 				<tr>
 					<td class="align-middle" style="width: 25%;">名前</td>

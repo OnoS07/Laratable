@@ -11,6 +11,9 @@
 				</div>
 			</div>
 			<div style="margin:30px auto ">
+				@if(session('flash_notice'))
+					<div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_notice')}}</div>
+				@endif
 				<span class="form-title">
                     @if(Auth::check())
 						Enjoy Delitable!

@@ -15,8 +15,9 @@ class CommentController extends Controller
         $comment->recipe_id = $request->recipe_id;
         $comment->user_id = $request->user_id;
         $comment->content = $request->content;
-        $comment->save();
-
+        if($comment->save()){
+            session()->flash('flash_comment', 'NEW COMMENT CREATE !');
+        }
         $recipe = Recipe::find($request->recipe_id);
         return redirect()->route('recipe.show', ['id'=>$recipe]);
     }
