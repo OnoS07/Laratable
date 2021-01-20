@@ -16,7 +16,7 @@ class IngredientController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, Ingredient::$rules);
+        $this->validate($request, Ingredient::$rules, [], ['content'=>'具材', 'amount'=>'分量']);
         $ingredient = Ingredient::find($request->id);
         $ingredient->content = $request->content;
         $ingredient->amount = $request->amount;
@@ -29,7 +29,7 @@ class IngredientController extends Controller
     public function store(Request $request)
     {
         $recipe = Recipe::find($request->recipe_id);
-        $this->validate($request, Ingredient::$rules);
+        $this->validate($request, Ingredient::$rules, [], ['content'=>'具材', 'amount'=>'分量']);
         $ingredient = new Ingredient;
         $ingredient->recipe_id = $request->recipe_id;
         $ingredient->content = $request->content;

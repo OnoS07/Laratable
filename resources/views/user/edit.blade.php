@@ -14,24 +14,21 @@
         <div class="row" style="margin-top: 30px;">
             <div class="col-lg-4 col-12" style="text-align: center;">
                 @if($user->profile_img)
-                    <img src="{{ asset('storage/'.$user->profile_img)}}" class="customer-image" id="img">
+                    <img src="{{ asset('storage/'.$user->profile_img)}}" class="customer-image" id="preview-image">
                 @else
-                    <img src="{{ asset('/img/logo.jpg') }}" class="customer-image" id="img">
+                    <img src="{{ asset('/img/logo.jpg') }}" class="customer-image" id="preview-image">
                 @endif
-                <input type="file" name="profile_img" onchange="previewImage(this);"></input>
-                <script>
-                    function previewImage(obj)
-                    {
-                      var fileReader = new FileReader();
-                      fileReader.onload = (function() {
-                        document.getElementById('img').src = fileReader.result;
-                      });
-                      fileReader.readAsDataURL(obj.files[0]);
-                    }
-                  </script>
+                <input type="file" name="profile_img" id="select-image""></input>
             </div>
 
             <div class="col-lg-8 col-12">
+                <ul>
+                    <div id="error_explanation">
+                        @foreach ($errors->all() as $error)
+                            <div class="bad-flash"><i class="fas fa-exclamation-circle"></i>{{$error}}
+                        @endforeach
+                    </div>
+                </ul>
                 <table class="table table-borderless">
                     <tr>
                         <td class="align-middle" style="width: 200px;">名前</td>

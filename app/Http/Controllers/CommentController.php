@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        $this->validate($request, Comment::$rules);
+        $this->validate($request, Comment::$rules, [], ['content'=>'コメント本文']);
         $comment = new Comment;
         $comment->recipe_id = $request->recipe_id;
         $comment->user_id = $request->user_id;

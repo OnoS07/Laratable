@@ -16,7 +16,7 @@ class CookingController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, Cooking::$rules);
+        $this->validate($request, Cooking::$rules,[], ['content'=>'作り方']);
         $cooking = Cooking::find($request->id);
         $cooking->content = $request->content;
         if($cooking->save()){
@@ -28,7 +28,7 @@ class CookingController extends Controller
     public function store(Request $request)
     {
         $recipe = Recipe::find($request->recipe_id);
-        $this->validate($request, Cooking::$rules);
+        $this->validate($request, Cooking::$rules,[], ['content'=>'作り方']);
         $cooking = new Cooking;
         $cooking->recipe_id = $request->recipe_id;
         $cooking->content = $request->content;
