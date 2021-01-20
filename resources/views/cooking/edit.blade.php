@@ -47,6 +47,13 @@
 	<div class="row" style="padding-top: 30px">
 		<div class="col-lg-12">
             <p style="border-bottom: 1px solid #F5F5F5; font-size: 20px" >作り方</p>
+            <ul>
+				<div id="error_explanation">
+					@foreach ($errors->all() as $error)
+						<div class="bad-flash"><i class="fas fa-exclamation-circle"></i>{{$error}}
+					@endforeach
+				</div>
+			</ul>
             @if(session('flash_update'))
                 <div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_update')}}</div>
             @endif

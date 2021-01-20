@@ -99,7 +99,7 @@
             <p style="border-bottom: 1px solid #F96167; font-size: 20px; font-weight: bold">{{$recipe->title}}
                 @if(Auth::check())
                     @if($recipe->user == Auth::user())
-                        <a href="{{route('recipe.edit', ['id'=>$recipe->user])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
+                        <a href="{{route('recipe.edit', ['id'=>$recipe->id])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
                     @endif
                 @endif
 			</p>
@@ -214,6 +214,13 @@
 				<div class="row" style="margin-top: 30px">
 					<div class="col-lg-12 col-12">
                         <span class="form-title" style="font-size: 20px">New Comment</span>
+                        <ul>
+                            <div id="error_explanation">
+                                @foreach ($errors->all() as $error)
+                                    <div class="bad-flash"><i class="fas fa-exclamation-circle"></i>{{$error}}
+                                @endforeach
+                            </div>
+                        </ul>
                         <form action="{{route('comment.store')}}" method="post">
                             @csrf
                             <input type="hidden" name="recipe_id" value="{{$recipe->id}}">

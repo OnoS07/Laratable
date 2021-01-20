@@ -29,6 +29,7 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
 
+        $this->validate($request, User::$rules);
         $user->name = $request->name;
         $user->introduction = $request->introduction;
 

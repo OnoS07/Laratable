@@ -16,6 +16,13 @@
             <input type="file" name="recipe_img" id="select-image" style="margin: 10px 0">
         </div>
         <div class="col-lg-6 col-12">
+            <ul>
+				<div id="error_explanation">
+					@foreach ($errors->all() as $error)
+						<div class="bad-flash"><i class="fas fa-exclamation-circle"></i>{{$error}}
+					@endforeach
+				</div>
+			</ul>
             <p style="border-bottom: 1px solid #F5F5F5; font-size: 20px" >レシピ</p>
                 <div class="row">
                     <div class="col-lg-3">レシピ名</div>

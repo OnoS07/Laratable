@@ -35,6 +35,13 @@
             @if(session('flash_update'))
                 <div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_update')}}</div>
             @endif
+			<ul>
+				<div id="error_explanation">
+					@foreach ($errors->all() as $error)
+						<div class="bad-flash"><i class="fas fa-exclamation-circle"></i>{{$error}}
+					@endforeach
+				</div>
+			</ul>
             @foreach($recipe->ingredients as $ingredient)
                 <form action="{{route('ingredient.update')}}" method="post">
                     @csrf
