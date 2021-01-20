@@ -40,12 +40,14 @@ class LoginController extends Controller
     }
 
     public function redirectPath()
-    {
+    {   
+        session()->flash('flash_notice', 'ログインしました');
         return '/';
     }
 
     public function guestLogin(){
     if (Auth::attempt(['email' => 'test@test', 'password' => 'testtest'])) {
+        session()->flash('flash_notice', 'ゲストユーザーとしてログインしました');
         return redirect('/');
     }
 

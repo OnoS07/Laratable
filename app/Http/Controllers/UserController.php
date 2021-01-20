@@ -37,7 +37,9 @@ class UserController extends Controller
             $user->profile_img = str_replace('public/','',$filename); // 保存するファイル名からpublicを除外
         }
         
-        $user->save();
+        if($user->save()){
+            session()->flash('flash_update', 'PROFILE UPDATE ! ');
+        }
         return redirect()->route('user.show', ['id' => $user]);
     }
 }
