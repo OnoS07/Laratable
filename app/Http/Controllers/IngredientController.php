@@ -20,7 +20,9 @@ class IngredientController extends Controller
         $ingredient = Ingredient::find($request->id);
         $ingredient->content = $request->content;
         $ingredient->amount = $request->amount;
-        $ingredient->save();
+        if($ingredient->save()){
+            session()->flash('flash_update', 'UPDATE !');
+        }
         return redirect()->route('ingredient.edit', ['id'=>$ingredient->recipe_id]);
     }
 
@@ -52,6 +54,7 @@ class IngredientController extends Controller
             if(empty($recipe->ingredients->first())){
                 if($recipe->recipe_status == 'open' || $recipe->recipe_status == 'close'){
                     $recipe->update(['recipe_status' => 'empty']);
+                    session()->flash('flash_notice', ' 材料が入力されていません。確認して下さい');
                 }
             }
         }

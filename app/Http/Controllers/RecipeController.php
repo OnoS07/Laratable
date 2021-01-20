@@ -17,6 +17,14 @@ class RecipeController extends Controller
     public function show(Request $request)
     {
         $recipe = Recipe::find($request->id);
+        
+        if(empty($recipe->ingredients->first())){
+            session()->flash('flash_ingredient', '材料がまだ入力されていません。確認して下さい');
+        }
+        if(empty($recipe->cookings->first())){
+            session()->flash('flash_cooking', '作り方がまだ入力されていません。確認して下さい');
+        }
+
         return view('recipe.show', ['recipe' => $recipe]);
     }
 
@@ -30,13 +38,16 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::find($request->id);
         if($request->recipe_status){
-            if($recipe->ingredients->isEmpty()){
+            if(empty($recipe->ingredients->first())){
                 return redirect()->route('recipe.show', ['id'=>$recipe]);
-            }elseif($recipe->cookings->isEmpty()){
+                session()->flash('flash_ingredient', '材料が入力されていないため投稿できません。確認して下さい');
+            }elseif(empty($recipe->cookings->first())){
                 return redirect()->route('recipe.show', ['id'=>$recipe]);
+                session()->flash('flash_cooking', '作り方が入力されていないため投稿できません。確認して下さい');
             }else{
                 $recipe->update(['recipe_status' => $request->recipe_status]);
                 return redirect()->route('recipe.show', ['id'=>$recipe]);
+                session()->flash('flash_create', 'YOUR RECIPE RELEASE !');
             }
         }else{
             $this->validate($request, Recipe::$rules);
@@ -49,7 +60,9 @@ class RecipeController extends Controller
                 $recipe->recipe_img = str_replace('public/','',$filename); 
             }
     
-            $recipe->save();
+            if($recipe->save()){
+                session()->flash('flash_create', 'UPDATE !');
+            }
             return redirect()->route('recipe.show', ['id'=>$recipe]);
         }
     }
@@ -75,8 +88,12 @@ class RecipeController extends Controller
             $recipe->recipe_img = "";
         }
 
-        $recipe->save();
-        return redirect()->route('ingredient.edit', ['id'=>$recipe]);
+        if($recipe->save()){
+            session()->flash('flash_create', 'NEW RECIPE CREATE !' );
+            return redirect()->route('ingredient.edit', ['id'=>$recipe]);
+        }
+
+        return view('recipe.create');
     }
 
     public function destroy(Request $request)

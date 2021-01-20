@@ -93,6 +93,9 @@
 		</div>
 
 		<div class="col-lg-6 col-12">
+            @if(session('flash_create'))
+                <div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_create')}}</div>
+            @endif
             <p style="border-bottom: 1px solid #F96167; font-size: 20px; font-weight: bold">{{$recipe->title}}
                 @if(Auth::check())
                     @if($recipe->user == Auth::user())
@@ -117,6 +120,9 @@
                     @endif
                 @endif
             </p>
+            @if(session('flash_ingredient'))
+                <div class="bad-flash"><i class="fas fa-exclamation-circle">{{session('flash_ingredient')}}</i></div>
+            @endif
             @foreach($recipe->ingredients as $ingredient)
 				<div class="row" style="margin-bottom: 10px">
 					<div class="col-lg-5 col-5 font-md-sp">
@@ -139,6 +145,9 @@
                     @endif
                 @endif
             </p>
+            @if(session('flash_cooking'))
+                <div class="bad-flash"><i class="fas fa-exclamation-circle">{{session('flash_cooking')}}</i></div>
+            @endif
             @foreach($recipe->cookings as $cooking)
 				<div class="row" style="margin-bottom: 10px">
 					<div class="col-lg-1 col-1 font-md-sp" style="text-align: right"  >

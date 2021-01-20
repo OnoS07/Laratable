@@ -14,7 +14,10 @@
 		<div class="col-lg-6 col-12">
 			<p style="border-bottom: 1px solid silver; font-size: 20px" >レシピ
                 <a href="{{route('recipe.edit', ['id'=>$recipe])}}" class="btn btn-warning btn-sm" style="margin-bottom:5px">編集</a>
-			</p>
+            </p>
+            @if(session('flash_create'))
+                <div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_create')}}</div>
+            @endif
 			<div class="row">
 				<div class="col-lg-3 col-3"><p>レシピ名</p></div>
 				<div class="col-lg-9 col-9"><p>{{$recipe->title}}</p></div>
@@ -29,6 +32,9 @@
 			</div>
 
             <p style="border-bottom: 1px solid silver; font-size: 20px" >材料</p>
+            @if(session('flash_update'))
+                <div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_update')}}</div>
+            @endif
             @foreach($recipe->ingredients as $ingredient)
                 <form action="{{route('ingredient.update')}}" method="post">
                     @csrf
@@ -55,6 +61,9 @@
                         </div>
                     </div>
             @endforeach
+            @if(session('flash_notice'))
+                <div class="bad-flash"><i class="fas fa-exclamation-circle">{{session('flash_notice')}}</i></div>
+            @endif
             <form action="{{route('ingredient.store')}}" method="post">
                 @csrf
                 <input type="hidden" name="recipe_id" value="{{$recipe->id}}">
