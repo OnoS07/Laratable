@@ -19,7 +19,9 @@ class CookingController extends Controller
         $this->validate($request, Cooking::$rules);
         $cooking = Cooking::find($request->id);
         $cooking->content = $request->content;
-        $cooking->save();
+        if($cooking->save()){
+            session()->flash('flash_update', 'UPDATE !');
+        }
         return redirect()->route('cooking.edit', ['id'=>$cooking->recipe_id]);
     }
 
@@ -47,13 +49,14 @@ class CookingController extends Controller
         $recipe = Recipe::find($request->recipe_id);
         $cooking = Cooking::find($request->id);
         if($cooking->delete()){
-            if(isset($recipe->cookings)){
+            if(empty($recipe->cookings->first())){
                 if($recipe->recipe_status == 'open' || $recipe->recipe_status == 'close'){
                     $recipe->update(['recipe_status' => 'empty']);
+                    session()->flash('flash_notice', '作り方が入力されていません。確認して下さい');
                 }
             }
         }
-        return redirect()->route('ingredient.edit', ['id'=>$recipe]);
+        return redirect()->route('cooking.edit', ['id'=>$recipe]);
     }
 }
 

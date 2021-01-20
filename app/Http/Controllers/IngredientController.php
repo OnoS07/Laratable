@@ -49,7 +49,7 @@ class IngredientController extends Controller
         $recipe = Recipe::find($request->recipe_id);
         $ingredient = Ingredient::find($request->id);
         if($ingredient->delete()){
-            if(isset($recipe->ingredients)){
+            if(empty($recipe->ingredients->first())){
                 if($recipe->recipe_status == 'open' || $recipe->recipe_status == 'close'){
                     $recipe->update(['recipe_status' => 'empty']);
                 }

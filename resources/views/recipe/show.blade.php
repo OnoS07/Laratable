@@ -196,6 +196,11 @@
                     </div>
                 </div>
             @endforeach
+            @if(session('flash_comment'))
+                <div class="good-flash"><i class="fas fa-check-circle"></i>
+                    {{session('flash_comment')}}
+                </div> 
+            @endif
             @if(Auth::check())
 				<div class="row" style="margin-top: 30px">
 					<div class="col-lg-12 col-12">

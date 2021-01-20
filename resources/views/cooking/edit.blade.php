@@ -47,6 +47,9 @@
 	<div class="row" style="padding-top: 30px">
 		<div class="col-lg-12">
             <p style="border-bottom: 1px solid #F5F5F5; font-size: 20px" >作り方</p>
+            @if(session('flash_update'))
+                <div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_update')}}</div>
+            @endif
             @foreach($recipe->cookings as $cooking)
                 <form action="{{route('cooking.update', ['id'=>$cooking])}}" method="post">
                     @csrf
@@ -70,6 +73,9 @@
                         </div>
                     </div>
             @endforeach
+            @if(session('flash_notice'))
+                <div class="bad-flash"><i class="fas fa-exclamation-circle">{{session('flash_notice')}}</i></div>
+            @endif
             <form action="{{route('cooking.store')}}" method="post">
                 @csrf
                 <input type="hidden" name="recipe_id" value="{{$recipe->id}}">
