@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -17,5 +19,14 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             return route('login');
         }
+    }
+
+    public function handle($request, Closure $next)
+    {
+        if (!Auth::check()) {
+            session()->flash('flash_auth', 'アカウント登録もしくはログインが必要です');
+            return redirect('/login');
+        }
+        return $next($request);
     }
 }
