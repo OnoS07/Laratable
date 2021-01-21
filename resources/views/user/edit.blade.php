@@ -44,11 +44,11 @@
                     </tr>
                     <tr>
                         <td class="align-middle">メールアドレス</td>
-                        @if($user->email == 'test@test')
-                            <td>ゲストアカウントのため、メールアドレスの変更はできません</td>
-                        @else
-                            <input type="text" name="email" value="{{ old('email') }}">
-                        @endif
+                            @if($user->email == 'test@test')
+                                <td>ゲストアカウントのため、メールアドレスの変更はできません</td>
+                            @else
+                                <td><input type="text" name="email" value="{{ old('email') }}"></td>
+                            @endif
                     </tr>
                 </table>
             </div>
