@@ -8,6 +8,9 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if(session('flash_auth'))
+                        <div class="bad-flash"><i class="fas fa-exclamation-circle">{{session('flash_auth')}}</i></div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
