@@ -67,6 +67,5 @@ class Kernel extends HttpKernel
         'CheckRecipeUser' => \App\Http\Middleware\CheckRecipeUser::class,
         'CheckIngredient' => \App\Http\Middleware\CheckIngredient::class,
         'CheckCooking' => \App\Http\Middleware\CheckCooking::class,
-
     ];
 }

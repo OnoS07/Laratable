@@ -12,11 +12,10 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = User::find($request -> id);
-        $recipes = Recipe::where('user_id', Auth::id())->get();
-        $open_recipes = Recipe::where('recipe_status', 'open')->get();
-        $close_recipes = Recipe::where('recipe_status', '!=', 'open')->get();
+        $open_recipes = Recipe::where('user_id', Auth::id())->where('recipe_status', 'open')->get();
+        $close_recipes = Recipe::where('user_id', Auth::id())->where('recipe_status', '!=', 'open')->get();
         
-        return view('user.show', ['user' => $user, 'recipes'=>$recipes, 'open_recipes'=>$open_recipes, 'close_recipes'=>$close_recipes]);
+        return view('user.show', ['user' => $user, 'open_recipes'=>$open_recipes, 'close_recipes'=>$close_recipes]);
     }
 
     public function edit(Request $request)
