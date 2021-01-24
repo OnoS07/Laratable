@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 use App\Models\Comment;
 
@@ -25,6 +26,10 @@ class RecipeController extends Controller
             session()->flash('flash_cooking', '作り方がまだ入力されていません。確認して下さい');
         }
 
+        if($recipe->user_id != Auth::id()){
+            $recipe->view_count = $recipe->view_count += 1;
+            $recipe->update(['view_count' => $recipe->view_count]);
+        }
         return view('recipe.show', ['recipe' => $recipe]);
     }
 
