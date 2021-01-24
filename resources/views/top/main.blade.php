@@ -88,10 +88,20 @@
                                 </a>
 
                                 <span class="hidden-sp hidden-tb">
-                                    <a href="{{route('user.show', ['id'=>$recipe->user])}}">
-                                        <i class="fas fa-user" style="color: #F96167"></i>
-                                        <span style="color: black">{{$recipe->user->name}}</span>
-                                    </a>
+									<a href="{{route('user.show', ['id' => $recipe->user_id])}}">
+										<i class="fas fa-user" style="color: #F96167"></i>
+										<span style="color: black">{{$recipe->user->name}}</span>
+									</a>
+									<span style="margin: 0 30px;">
+										<i class="fas fa-comment" style="color: #F96167;"></i>
+											<span style="color: black">{{count($recipe->comments)}}件</span>
+									</span>
+									<i class="fas fa-heart" style="color: #F96167"></i>
+									<span style="color:black">
+										{{count($recipe->favorites)}}
+									</span>
+									<i class="fas fa-paw", style="color: #F96167; margin-left: 30px;"></i>
+										{{$recipe->view_count}}
                                 </span>
                             </div>
 						@endforeach

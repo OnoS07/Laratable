@@ -98,11 +98,17 @@
 							</span>
 						</a>
 						<span class="hidden-sp hidden-tb">
-							<i class="fas fa-comment" style="color: #F96167;"></i>
-								<span style="color: black">{{count($recipe->comments)}}件</span>
+							<span>
+								<i class="fas fa-comment" style="color: #F96167;"></i>
+									<span style="color: black">{{count($recipe->comments)}}件</span>
+							</span>
 							<i class="fas fa-heart" style="color: #F96167;margin-left: 20px;"></i>
-								<span style="color:black">{{count($recipe->favorites)}}</span>
-							<span><i class="fas fa-calendar-alt"style="color: #F96167; margin-left: 20px;"></i>
+							<span style="color:black">
+								{{count($recipe->favorites)}}
+							</span>
+							<i class="fas fa-paw", style="color: #F96167; margin-left: 20px;"></i>
+								{{$recipe->view_count}}
+							<span><i class="fas fa-calendar-alt" style="color: #F96167;margin-left: 20px;"></i>
 								{{$recipe->created_at->format('Y/m/d')}}
 							</span>
 						</span>

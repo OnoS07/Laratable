@@ -39,6 +39,8 @@
                                 <span style="color:black">
                                     {{count($recipe->favorites)}}
                                 </span>
+                                <i class="fas fa-paw", style="color: #F96167; margin-left: 30px;"></i>
+                                    {{$recipe->view_count}}
 							</span>
 					</div>
 				@endforeach
