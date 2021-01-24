@@ -71,6 +71,8 @@
                                     <span>{{count($recipe->favorites)}}</span>
                             @endif
                         </span>
+                        <i class="fas fa-paw", style="color: #F96167; margin-left: 30px;"></i>
+						    {{$recipe->view_count}}<br>
                         <span><i class="fas fa-calendar-alt" style="color: #F96167"></i>
                             {{$recipe->created_at->format('Y/m/d')}}
                         </span>
@@ -79,6 +81,8 @@
                             <i class="fas fa-heart" style="color: #F96167"></i>
                             <span style="color:black">{{count($recipe->favorites)}}</span>
                         </span>
+                        <i class="fas fa-paw", style="color: #F96167; margin-left: 30px;"></i>
+                            {{$recipe->view_count}}<br>
                         <span><i class="fas fa-calendar-alt" style="color: #F96167"></i>
                             {{$recipe->created_at->format('Y/m/d')}}
                         </span>

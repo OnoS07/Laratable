@@ -12,8 +12,7 @@ class CheckIngredient
 {
     public function handle($request, Closure $next)
     {
-        $ingredient = Ingredient::find($request->id);
-        $recipe = Recipe::find($ingredient->recipe_id);
+        $recipe = Recipe::find($request->recipe_id);
         if ($recipe->user != Auth::user()) {
             return redirect()->route('top.main');
         }
