@@ -38,6 +38,11 @@ class Recipe extends Model
         return $this->hasMany('App\Models\Favorite');
     }
 
+    public function recipe_tags(){
+      return $this->hasMany('App\Models\RecipeTag');
+    }
+
+    #いいねしたレシピがどうか判断
     public function favorited_by()
     {  
       $favorite_users = array();

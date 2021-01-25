@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" style="padding-bottom: 100px;">
-	<span class="form-title"><i class="fas fa-utensils"></i> Recipe</span>
+    <span class="form-title"><i class="fas fa-utensils"></i> Recipe</span>
     <span style="margin-left: 10px;font-size: 15px;">
         <a href="{{route('recipe.index')}}">>back</a>
     </span>
@@ -29,7 +29,7 @@
                         <form action="{{route('recipe.destroy')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$recipe->id}}">
-                            <input type="submit" value="レシピを削除する" class="btn btn-danger btn-submit-sm">
+                            <input type="submit" value="レシピを削除する" class="btn btn-danger submit-btn">
                         </form>
                     </span>
 				@endif
@@ -39,7 +39,16 @@
             @else
                 <img src="{{asset('/img/logo.jpg') }}" class="recipe-image-show" style="margin:10px 0;">
             @endif
-            <div style="margin-top: 20px;">
+            <div style="display: flex;">
+                @foreach($recipe->recipe_tags as $tag)
+                    <form action="{{route('recipe.index')}}" method="get">
+                        @csrf
+                        <input type="hidden" name="serch_tag" value="{{$tag->tag_name}}">
+                        <input type="submit" class="recipe-tag" value="{{$tag->tag_name}}" style="border: none;">
+                    </form>
+                @endforeach
+            </div>
+            <div>
 				<span class="font-md">
                     <a href="{{route('user.show', ['id'=>$recipe->user])}}">
 						<i class="fas fa-user" style="color: #F96167"></i>

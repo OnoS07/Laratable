@@ -5,7 +5,11 @@
 <div class="container" style="padding-bottom: 100px;">
 	<div class="row">
 		<div class="col-lg-12">
-			<span class="form-title" style="margin-right: 20px;"><i class="fas fa-utensils"></i>Recipes</span>
+            <span class="form-title" style="margin-right: 20px;"><i class="fas fa-utensils"></i>Recipes
+                @if($tag)
+                    <span style="font-size: 15px;font-weight: bold"> タグ: [ {{$tag}} ]</span>
+                @endif
+            </span>
             <div class="recipe-contents"  style="padding-top: 20px">
                 @foreach($recipes as $recipe)
 					<div class="recipe-content">

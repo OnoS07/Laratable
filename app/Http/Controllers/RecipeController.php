@@ -4,15 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Models\Recipe;
 use App\Models\Comment;
+use App\Models\RecipeTag;
 
 class RecipeController extends Controller
 {
     public function index(Request $request)
     {
-        $recipes = Recipe::where('recipe_status', 'open')->get();
-        return view('recipe.index', ['recipes' => $recipes]);
+        if($request->serch_tag){
+            $tag = $request->serch_tag;
+            #検索タグと同じ名前のRecipeTagを代入
+            $recipe_tags = RecipeTag::where('tag_name',$tag);
+            #該当するタグのあるレシピidを取得
+            $recipe_tag_ids = $recipe_tags->pluck('recipe_id');
+            #レシピ一覧を取得
+            $recipes = Recipe::whereIn('id',$recipe_tag_ids)->where('recipe_status', 'open')->get();
+            return view('recipe.index', ['recipes' => $recipes, 'tag' => $tag]);
+        }else{
+            $recipes = Recipe::where('recipe_status', 'open')->get();
+            return view('recipe.index', ['recipes' => $recipes]);
+        }
+        
     }
 
     public function show(Request $request)
@@ -94,11 +108,20 @@ class RecipeController extends Controller
         }
 
         if($recipe->save()){
+            if($request->tag_names){
+                $tags = Str::of($request->tag_names)->explode(',');
+                foreach($tags as $tag){
+                    $recipe_tag = New RecipeTag;
+                    $recipe_tag->recipe_id = $recipe->id;
+                    $recipe_tag->tag_name = $tag;
+                    $recipe_tag->save();
+                }
+            }
             session()->flash('flash_create', 'NEW RECIPE CREATE !' );
             return redirect()->route('ingredient.edit', ['id'=>$recipe]);
+        }else{
+            return view('recipe.create');
         }
-
-        return view('recipe.create');
     }
 
     public function destroy(Request $request)

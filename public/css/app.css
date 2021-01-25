@@ -16176,7 +16176,7 @@ a:hover {
 }
 
 .submit-btn {
-  width: 100px;
+  width: 150px;
   height: 40px;
 }
 
@@ -16201,6 +16201,8 @@ textarea {
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
+  height: 30px;
+  width: 70px;
 }
 
 [type=search] {
