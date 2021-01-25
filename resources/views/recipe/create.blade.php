@@ -9,7 +9,9 @@
             @csrf
             <input type="hidden" name="user_id" value="{{Auth::id()}}">
             <img src="{{asset('/img/logo.jpg') }}" class="recipe-image-show" id="preview-image">
-            <input type="file" name="recipe_img" id="select-image" style="margin: 10px 0"><br>
+			<input type="file" name="recipe_img" id="select-image" style="margin: 10px 0"><br>
+			<span>タグ(間にはカンマ , をつけてください)</span><br>
+				<input type="text" name="tag_names" style="width: 80%" placeholder="豚肉,パスタ,玉ねぎ ・・・">
 		</div>
 		<div class="col-lg-6">
 			<ul>

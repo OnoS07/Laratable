@@ -29,7 +29,7 @@
                         <form action="{{route('recipe.destroy')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$recipe->id}}">
-                            <input type="submit" value="レシピを削除する" class="btn btn-danger btn-submit-sm">
+                            <input type="submit" value="レシピを削除する" class="btn btn-danger submit-btn">
                         </form>
                     </span>
 				@endif
@@ -39,6 +39,11 @@
             @else
                 <img src="{{asset('/img/logo.jpg') }}" class="recipe-image-show" style="margin:10px 0;">
             @endif
+            @foreach($recipe->recipe_tags as $tag)
+                <span class="recipe-tag">
+                    {{$tag->tag_name}}
+                </span>
+            @endforeach
             <div style="margin-top: 20px;">
 				<span class="font-md">
                     <a href="{{route('user.show', ['id'=>$recipe->user])}}">
