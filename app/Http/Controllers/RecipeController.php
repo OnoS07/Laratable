@@ -13,8 +13,20 @@ class RecipeController extends Controller
 {
     public function index(Request $request)
     {
-        $recipes = Recipe::where('recipe_status', 'open')->get();
-        return view('recipe.index', ['recipes' => $recipes]);
+        if($request->serch_tag){
+            $tag = $request->serch_tag;
+            #検索タグと同じ名前のRecipeTagを代入
+            $recipe_tags = RecipeTag::where('tag_name',$tag);
+            #該当するタグのあるレシピidを取得
+            $recipe_tag_ids = $recipe_tags->pluck('recipe_id');
+            #レシピ一覧を取得
+            $recipes = Recipe::whereIn('id',$recipe_tag_ids)->where('recipe_status', 'open')->get();
+            return view('recipe.index', ['recipes' => $recipes, 'tag' => $tag]);
+        }else{
+            $recipes = Recipe::where('recipe_status', 'open')->get();
+            return view('recipe.index', ['recipes' => $recipes]);
+        }
+        
     }
 
     public function show(Request $request)
