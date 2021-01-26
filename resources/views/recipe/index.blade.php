@@ -6,9 +6,19 @@
 	<div class="row">
 		<div class="col-lg-12">
             <span class="form-title" style="margin-right: 20px;"><i class="fas fa-utensils"></i>Recipes
-                @if($tag)
+                @isset($tag)
                     <span style="font-size: 15px;font-weight: bold"> タグ: [ {{$tag}} ]</span>
-                @endif
+                @endisset
+                @isset($word)
+                <span style="font-size: 15px;font-weight: bold"> 検索: [ {{$word}} ]</span>
+            @endisset
+            </span>
+            <span style="float: right">
+                <form action="{{route('recipe.index')}}" method="get" style="margin: 15px 20px 0 0">
+                    @csrf
+                    <input type="text" name="search_word" placeholder = "キーワード" >
+                    <input type="submit" value="検索">
+                </form>
             </span>
             <div class="recipe-contents"  style="padding-top: 20px">
                 @foreach($recipes as $recipe)

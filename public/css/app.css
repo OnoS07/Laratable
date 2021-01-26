@@ -16300,7 +16300,7 @@ textarea:focus {
 }
 
 .recipe-content {
-  width: 28%;
+  width: 30%;
   margin: 15px 2.5%;
   display: flex;
   flex-direction: column;

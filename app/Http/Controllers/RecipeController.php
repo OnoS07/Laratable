@@ -22,11 +22,25 @@ class RecipeController extends Controller
             #レシピ一覧を取得
             $recipes = Recipe::whereIn('id',$recipe_tag_ids)->where('recipe_status', 'open')->get();
             return view('recipe.index', ['recipes' => $recipes, 'tag' => $tag]);
+        }elseif($request->search_word){
+            #検索フォームでinputされた値を取得
+            $word = $request->input('search_word');
+            #公開中かつ、タイトルか紹介文に検索ワードが入っているレシピを取得
+            $recipes = Recipe::where('recipe_status', 'open')->where('title', 'LIKE', "%{$word}%")->orWhere('introduction', 'LIKE', "%{$word}%")
+                #ネスト先の材料に検索ワードが入っているレシピを取得
+                ->orWherehas('ingredients', function($query) use($word){
+                    $query->where('content', 'LIKE', "%{$word}%");
+                })
+                #ネスト先のタグに検索ワードが入っているレシピを取得
+                ->orWherehas('recipe_tags', function($query) use($word){
+                    $query->where('tag_name', 'LIKE', "%{$word}%");
+                })
+                ->get();
+            return view('recipe.index', ['recipes' => $recipes, 'word' => $word]);
         }else{
             $recipes = Recipe::where('recipe_status', 'open')->get();
             return view('recipe.index', ['recipes' => $recipes]);
         }
-        
     }
 
     public function show(Request $request)
