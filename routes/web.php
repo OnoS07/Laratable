@@ -45,6 +45,9 @@ Route::post('comment/destroy', 'App\Http\Controllers\CommentController@destroy')
 Route::post('favorite/store', 'App\Http\Controllers\FavoriteController@store')->name('favorite.store');
 Route::post('favorite/destroy', 'App\Http\Controllers\FavoriteController@destroy')->name('favorite.destroy');
 
+Route::post('follow', 'App\Http\Controllers\RelationshipController@follow')->name('follow');
+Route::post('unfollow', 'App\Http\Controllers\RelationshipController@unfollow')->name('unfollow');
+
 # 以下HTTPミドルウェアの設定
 # ログインしていなければ使用できない
 Route::group(['middleware' => 'auth'], function () {
@@ -73,13 +76,15 @@ Route::group(['middleware' => 'CheckRecipeUser'], function (){
     Route::get('recipe/{id}/cookings/edit', 'App\Http\Controllers\CookingController@edit')->name('cooking.edit');
 });
 
+# 作成したユーザーとは異なる材料の編集
 Route::group(['middleware' => 'CheckIngredient'], function (){
     Route::post('ingredient/update', 'App\Http\Controllers\IngredientController@update')->name('ingredient.update');
     Route::post('ingredient/store', 'App\Http\Controllers\IngredientController@store')->name('ingredient.store');
     Route::post('ingredient/destroy', 'App\Http\Controllers\IngredientController@destroy')->name('ingredient.destroy');
 });
 
-Route::group(['middleware' => 'CheckIngredient'], function (){
+# 作成したユーザーとは異なる作り方の編集
+Route::group(['middleware' => 'CheckCooking'], function (){
     Route::post('cooking/store', 'App\Http\Controllers\CookingController@store')->name('cooking.store');
     Route::post('cooking/update', 'App\Http\Controllers\CookingController@update')->name('cooking.update');
     Route::post('cooking/destroy', 'App\Http\Controllers\CookingController@destroy')->name('cooking.destroy');

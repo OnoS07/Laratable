@@ -18,7 +18,33 @@
             @else
                 <img src="{{ asset('/img/logo.jpg') }}" class="customer-image">
             @endif
+			<div style="margin:10px 0">
+				<a href="/" style="margin-right: 20px">
+					フォロー
+				</a>
+				<a href="/">
+					フォロワー
+				</a>
+			</div>
+			@if(Auth::check())		
+				@if(Auth::user() != $user)
+					@if($user->followed_by())
+						<form action="{{route('unfollow')}}" method="post">
+							@csrf
+							<input type="hidden" name="user_id" value="{{$user->id}}">
+							<input type="submit" value="フォローをやめる" class="btn btn-secondary btn-submit" style="border: none;">
+						</form>
+					@else
+						<form action="{{route('follow')}}" method="post">
+							@csrf
+							<input type="hidden" name="user_id" value="{{$user->id}}">
+							<input type="submit" value="フォローをする" class="btn btn-warning btn-submit" style="border: none;">
+						</form>
+					@endif
+				@endif
+			@endif
 		</div>
+
 		<div class="col-lg-8 col-12">
 			@if(session('flash_update'))
 				<div class="good-flash"><i class="fas fa-check-circle"></i>{{session('flash_update')}}</div> 
@@ -33,10 +59,10 @@
 					<td class="align-middle">{{$user->introduction}}</td>
 				</tr>
 				@if($user == Auth::user())
-				<tr>
-					<td class="table-active align-middle">メールアドレス</td>
-					<td class="align-middle">{{$user->email}}</td>
-				</tr>
+					<tr>
+						<td class="table-active align-middle">メールアドレス</td>
+						<td class="align-middle">{{$user->email}}</td>
+					</tr>
 				@endif
 			</table>
 			<div>
