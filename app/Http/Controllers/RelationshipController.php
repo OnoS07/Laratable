@@ -24,4 +24,18 @@ class RelationshipController extends Controller
 
         return redirect()->route('user.show', ['id'=>$followed_user_id]);
     }
+
+    public function following(Request $request){
+        $user = User::find($request->id);
+        $followings = $user->followings;
+
+        return view('relationship.following', ['user'=>$user, 'followings' => $followings]);
+    }
+
+    public function follower(Request $request){
+        $user = User::find($request->id);
+        $followers = $user->followers;
+
+        return view('relationship.follower', ['user'=>$user, 'followers' => $followers]);
+    }
 }

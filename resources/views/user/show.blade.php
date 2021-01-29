@@ -17,30 +17,28 @@
                 <img src="{{ asset('storage/'.$user->profile_img)}}" class="customer-image">
             @else
                 <img src="{{ asset('/img/logo.jpg') }}" class="customer-image">
-            @endif
+			@endif
 			<div style="margin:10px 0">
-				<a href="/" style="margin-right: 20px">
-					フォロー
+				<a href="{{route('relationship.following', ['id'=>$user])}}" style="margin-right: 20px">
+					フォロー：
 				</a>
-				<a href="/">
-					フォロワー
+				<a href="{{route('relationship.follower', ['id'=>$user])}}">
+					フォロワー：
 				</a>
 			</div>
-			@if(Auth::check())		
-				@if(Auth::user() != $user)
-					@if($user->followed_by())
-						<form action="{{route('unfollow')}}" method="post">
-							@csrf
-							<input type="hidden" name="user_id" value="{{$user->id}}">
-							<input type="submit" value="フォローをやめる" class="btn btn-secondary btn-submit" style="border: none;">
-						</form>
-					@else
-						<form action="{{route('follow')}}" method="post">
-							@csrf
-							<input type="hidden" name="user_id" value="{{$user->id}}">
-							<input type="submit" value="フォローをする" class="btn btn-warning btn-submit" style="border: none;">
-						</form>
-					@endif
+			@if(Auth::check() && Auth::user() != $user)		
+				@if($user->followed_by())
+					<form action="{{route('unfollow')}}" method="post">
+						@csrf
+						<input type="hidden" name="user_id" value="{{$user->id}}">
+						<input type="submit" value="フォローをやめる" class="btn btn-secondary submit-btn" style="border: none;">
+					</form>
+				@else
+					<form action="{{route('follow')}}" method="post">
+						@csrf
+						<input type="hidden" name="user_id" value="{{$user->id}}">
+						<input type="submit" value="フォローをする" class="btn btn-warning submit-btn" style="border: none;">
+					</form>
 				@endif
 			@endif
 		</div>

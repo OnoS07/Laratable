@@ -47,6 +47,8 @@ Route::post('favorite/destroy', 'App\Http\Controllers\FavoriteController@destroy
 
 Route::post('follow', 'App\Http\Controllers\RelationshipController@follow')->name('follow');
 Route::post('unfollow', 'App\Http\Controllers\RelationshipController@unfollow')->name('unfollow');
+Route::get('following', 'App\Http\Controllers\RelationshipController@following')->name('relationship.following');
+Route::get('follower', 'App\Http\Controllers\RelationshipController@follower')->name('relationship.follower');
 
 # 以下HTTPミドルウェアの設定
 # ログインしていなければ使用できない

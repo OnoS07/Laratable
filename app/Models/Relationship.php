@@ -11,6 +11,4 @@ class Relationship extends Model
         'follow_id',
         'follower_id',
     ];
-
-    
 }
