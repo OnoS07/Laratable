@@ -8,7 +8,9 @@
 ##### 1/11：開発開始 
 ##### 1/14：レシピ投稿部分の実装:[milestone](https://github.com/OnoS07/Laratable/milestone/1)
 ##### 1/24：レシピ周辺機能の拡充：[milestone](https://github.com/OnoS07/Laratable/milestone/2)
-##### 1/31(予定)：追加機能の実装：[milestone](https://github.com/OnoS07/Laratable/milestone/3)
+##### 1/31：追加機能の実装：[milestone](https://github.com/OnoS07/Laratable/milestone/3)
+##### 2/7(予定)：テスト作成/バグ修正
+
 
 ## 技術・ツール
 - デプロイ：未定
