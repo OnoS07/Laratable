@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class RecipeTag extends Model
 {
+    use HasFactory;
+    
     protected $guarded = array('id');
 
     public static $rules = array(

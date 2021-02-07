@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Recipe extends Model
 {
+    use HasFactory;
+    
     protected $guarded = array('id');
 
     public static $rules = array(
@@ -17,7 +19,6 @@ class Recipe extends Model
         'amount' => 'required|max:10'
     );
 
-    #リレーションを作成
     public function ingredients(){
         return $this->hasMany('App\Models\Ingredient');
     }

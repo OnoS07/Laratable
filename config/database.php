@@ -42,7 +42,15 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-
+        'testing' => [
+           'driver'   => 'sqlite',
+           'database' => ':memory:', // SQLiteのインメモリ機能を使用
+           'prefix'   => '',
+           'options'  => [
+               // テストデータの永続化
+               PDO::ATTR_PERSISTENT => false,
+           ],
+        ],
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
