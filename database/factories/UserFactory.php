@@ -26,6 +26,8 @@ class UserFactory extends Factory
             'name' => 'Alice',
             'email' => 'Alice@alice',
             'email_verified_at' => now(),
+            'profile_img' => '',
+            'introduction' => '',
             'password' => 'alicealice',
             'remember_token' => Str::random(10),
         ];
