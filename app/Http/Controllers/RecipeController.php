@@ -70,6 +70,8 @@ class RecipeController extends Controller
     public function update(Request $request)
     {
         $recipe = Recipe::find($request->id);
+        $this->validate($request, Recipe::$rules);
+        
         if($request->recipe_status){
             if(empty($recipe->ingredients->first())){
                 return redirect()->route('recipe.show', ['id'=>$recipe]);

@@ -24,9 +24,10 @@ class RecipeFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'title' => 'test-title',
+            'title' => 'recipe-title',
             'introduction' => 'test-introduction',
             'amount' => 'test',
+            'recipe_img' => '',
             'recipe_status' => 'open'
         ];
     }
