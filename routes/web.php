@@ -34,6 +34,11 @@ Route::get('recipe/create', 'App\Http\Controllers\RecipeController@create')->nam
 Route::post('recipe/store', 'App\Http\Controllers\RecipeController@store')->name('recipe.store');
 Route::post('recipe/destroy', 'App\Http\Controllers\RecipeController@destroy')->name('recipe.destroy');
 
+Route::get('recipe/{id}/ingredients/edit', 'App\Http\Controllers\IngredientController@edit')->name('ingredient.edit');
+Route::post('ingredient/update', 'App\Http\Controllers\IngredientController@update')->name('ingredient.update');
+Route::post('ingredient/store', 'App\Http\Controllers\IngredientController@store')->name('ingredient.store');
+Route::post('ingredient/destroy', 'App\Http\Controllers\IngredientController@destroy')->name('ingredient.destroy');
+
 Route::get('recipe/{id}/cookings/edit', 'App\Http\Controllers\CookingController@edit')->name('cooking.edit');
 Route::post('cooking/store', 'App\Http\Controllers\CookingController@store')->name('cooking.store');
 Route::post('cooking/update', 'App\Http\Controllers\CookingController@update')->name('cooking.update');
@@ -81,13 +86,17 @@ Route::group(['middleware' => 'CheckRecipeUser'], function (){
 # 作成したユーザーとは異なる材料の編集
 Route::group(['middleware' => 'CheckIngredient'], function (){
     Route::post('ingredient/update', 'App\Http\Controllers\IngredientController@update')->name('ingredient.update');
-    Route::post('ingredient/store', 'App\Http\Controllers\IngredientController@store')->name('ingredient.store');
     Route::post('ingredient/destroy', 'App\Http\Controllers\IngredientController@destroy')->name('ingredient.destroy');
 });
 
 # 作成したユーザーとは異なる作り方の編集
 Route::group(['middleware' => 'CheckCooking'], function (){
-    Route::post('cooking/store', 'App\Http\Controllers\CookingController@store')->name('cooking.store');
     Route::post('cooking/update', 'App\Http\Controllers\CookingController@update')->name('cooking.update');
     Route::post('cooking/destroy', 'App\Http\Controllers\CookingController@destroy')->name('cooking.destroy');
+});
+
+# 作成したユーザーとは異なる材料・作り方の作成
+Route::group(['middleware' => 'CheckRecipeId'], function (){
+    Route::post('ingredient/store', 'App\Http\Controllers\IngredientController@store')->name('ingredient.store');
+    Route::post('cooking/store', 'App\Http\Controllers\CookingController@store')->name('cooking.store');
 });
