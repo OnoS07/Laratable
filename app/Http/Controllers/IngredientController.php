@@ -50,8 +50,9 @@ class IngredientController extends Controller
     {
         $recipe = Recipe::find($request->recipe_id);
         $ingredient = Ingredient::find($request->id);
+        $ingredients = Ingredient::where('recipe_id', $recipe);
         if($ingredient->delete()){
-            if(empty($recipe->ingredients->first())){
+            if(empty($ingredients->first())){
                 if($recipe->recipe_status == 'open' || $recipe->recipe_status == 'close'){
                     $recipe->update(['recipe_status' => 'empty']);
                     session()->flash('flash_notice', ' 材料が入力されていません。確認して下さい');

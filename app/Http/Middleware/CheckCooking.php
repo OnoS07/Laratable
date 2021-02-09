@@ -12,7 +12,8 @@ class CheckCooking
 {
     public function handle($request, Closure $next)
     {
-        $recipe = Recipe::find($request->recipe_id);
+        $cooking = Cooking::find($request->id);
+        $recipe = Recipe::find($cooking->recipe_id);
         if ($recipe->user != Auth::user()) {
             return redirect()->route('top.main');
         }

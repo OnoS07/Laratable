@@ -7,9 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Recipe;
-use App\Models\Ingredient;
-use App\Models\Cooking;
-use Illuminate\Support\Str;
 
 class RecipeTest extends TestCase
 {
