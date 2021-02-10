@@ -182,11 +182,11 @@
                     <div class="row">
                         <div class="col-lg-4 col-4" style="text-align: center">
                             @if($comment->user->profile_img)
-                                <a href="{{route('user.show', ['id'=>$comment->user->id])}}">
+                                <a href="{{route('user.show', ['id'=>$comment->user_id])}}">
                                     <img src="{{asset('storage/'.$comment->user->profile_img)}}" class="comment-image">
                                 </a>
                             @else
-                                <a href="{{route('user.show'), ['id'=>$comment->user->id]}}">
+                                <a href="{{route('user.show', ['id'=>$comment->user_id])}}">
                                     <img src="{{asset('/img/logo.jpg') }}" class="comment-image">
                                 </a>
                             @endif

@@ -58,7 +58,7 @@ class IngredientTest extends TestCase
             'content' => 'test-content',
         ]);
     }
-    
+
     public function test_材料の更新ができる()
     {
         $ingredient = Ingredient::factory()->create();

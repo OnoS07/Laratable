@@ -14,7 +14,7 @@ class CookingTest extends TestCase
 
     use RefreshDatabase;
 
-   public function test_作り方編集画面が表示される()
+    public function test_作り方編集画面が表示される()
     {
         $recipe = Recipe::factory()->create();
         $user = User::find($recipe->user_id);
@@ -99,7 +99,7 @@ class CookingTest extends TestCase
             ->withSession(['foo' => 'bar'])
             ->post(route('cooking.destroy', ['id'=>$cooking->id, 'recipe_id'=>$cooking->recipe_id]));
         $response->assertStatus(302)
-            ->assertRedirect(route('cooking.edit', ['id'=>$recipe]));;
+            ->assertRedirect(route('cooking.edit', ['id'=>$recipe]));
         $this->assertDeleted($cooking);
     }
 }
