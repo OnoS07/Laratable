@@ -14,7 +14,7 @@ class CookingTest extends TestCase
 
     use RefreshDatabase;
 
-   public function test_作り方編集画面が表示される()
+    public function test_作り方編集画面が表示される()
     {
         $recipe = Recipe::factory()->create();
         $user = User::find($recipe->user_id);

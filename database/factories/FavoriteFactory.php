@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Favorite;
+use App\Models\User;
+use App\Models\Recipe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FavoriteFactory extends Factory
@@ -22,7 +24,8 @@ class FavoriteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => '',
+            'recipe_id' => '',
         ];
     }
 }
