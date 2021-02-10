@@ -99,7 +99,7 @@ class CookingTest extends TestCase
             ->withSession(['foo' => 'bar'])
             ->post(route('cooking.destroy', ['id'=>$cooking->id, 'recipe_id'=>$cooking->recipe_id]));
         $response->assertStatus(302)
-            ->assertRedirect(route('cooking.edit', ['id'=>$recipe]));;
+            ->assertRedirect(route('cooking.edit', ['id'=>$recipe]));
         $this->assertDeleted($cooking);
     }
 }
