@@ -47,6 +47,7 @@ class User extends Authenticatable
     protected $guarded = array('id');
     public static $rules = array(
         'name' => 'required|max:10',
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'introduction' => 'required|max:200',
     );
 
@@ -62,32 +63,33 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Favorite');
     }
 
-     # フォローしている
-     public function followings(){
-         return $this->belongsToMany('App\Models\User', 'relationships', 'follow_id', 'follower_id');
-     }
- 
-     # フォローされている
-     public function followers(){
-         return $this->belongsToMany('App\Models\User', 'relationships', 'follower_id', 'follow_id');
-     }
+    # フォローしているユーザー
+    public function followings(){
+        return $this->belongsToMany('App\Models\User', 'relationships', 'follow_id', 'follower_id');
+    }
+
+    # フォローされているユーザー
+    public function followers(){
+        return $this->belongsToMany('App\Models\User', 'relationships', 'follower_id', 'follow_id');
+    }
+
+    public function getFollowCount(){
+        return $this->followings->count();
+    }
+
+    public function getFollowerCount(){
+    return $this->followers->count();
+    }
 
     #フォローしたユーザーかどうか判断
-     public function followed_by(){
-         #ログイン中ユーザーのフォローに$thisユーザーがいなければ(null)フォローを外す(true)を表示
-         #followingを 'App\Models\User' として扱っているので、 'id' でユーザーのidが検索される
-         if((Auth::user()->followings->where('id', $this->id)->first()) != null){
+    public function followed_by(){
+        #ログイン中ユーザーのフォローに$thisユーザーがいなければ(null)でフォローを外す(true)を表示
+        #followingを 'App\Models\User' として扱っているので、 'id' でユーザーのidが検索される
+        if((Auth::user()->followings->where('id', $this->id)->first()) != null){
             return true;
-         }else{
+        }else{
             return false;
-         } 
-     }
-
-     public function getFollowCount(){
-         return $this->followings->count();
-     }
-
-     public function getFollowerCount(){
-        return $this->followers->count();
+        } 
     }
+   
 }
