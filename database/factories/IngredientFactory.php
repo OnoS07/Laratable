@@ -25,7 +25,7 @@ class IngredientFactory extends Factory
     {
         return [
             'recipe_id' => Recipe::factory(),
-            'content' => 'test-content',
+            'content' => 'test',
             'amount' => 'test'
         ];
     }
