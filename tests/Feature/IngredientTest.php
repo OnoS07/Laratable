@@ -33,13 +33,13 @@ class IngredientTest extends TestCase
             ->withSession(['foo' => 'bar'])
             ->post(route('ingredient.store'),[
                 'recipe_id' => $recipe->id,
-                'content' => 'test-content',
+                'content' => 'test',
                 'amount' => 'test'
             ]);
         $response->assertStatus(302)
             ->assertRedirect(route('ingredient.edit', ['id'=>$recipe]));
         $this->assertDatabaseHas('ingredients', [
-                'content' => 'test-content',
+                'content' => 'test',
             ]);
     }
 
@@ -69,12 +69,11 @@ class IngredientTest extends TestCase
             ->post(route('ingredient.update',[
                 'id' => $ingredient->id,
                 'recipe_id' => $recipe->id,
-                'content' => 'update-content',
+                'content' => 'update',
                 'amount' => 'test'
             ]));
-        $ingredient = Ingredient::where('content', 'update-content')->first();
         $this->assertDatabaseHas('ingredients', [
-                'content' => 'update-content',
+                'content' => 'update',
             ]);
     }
 
