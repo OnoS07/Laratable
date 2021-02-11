@@ -30,6 +30,7 @@ class UserController extends Controller
 
         $this->validate($request, User::$rules);
         $user->name = $request->name;
+        $user->email = $request->email;
         $user->introduction = $request->introduction;
 
         if($request->profile_img){

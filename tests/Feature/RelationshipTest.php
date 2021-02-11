@@ -35,7 +35,6 @@ class RelationshipTest extends TestCase
 
     public function test_フォローができる()
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         $followed = User::factory()->create([
             'name' => 'follow',

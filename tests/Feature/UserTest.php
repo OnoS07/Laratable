@@ -37,4 +37,40 @@ class UserTest extends TestCase
             ->post(route('user.update',['id'=>$user]));
         $response->assertStatus(302);
     }
+
+    public function test_ユーザー情報の更新ができる()
+    {
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->post(route('user.update'),[
+                'id' => $user->id,
+                'name' => 'update',
+                'email' => 'test@test',
+                'profile_img' => '',
+                'introduction' => 'test-introduction',
+            ]);
+        $response->assertStatus(302)
+            ->assertRedirect(route('user.show', ['id'=>$user]));
+        $this->assertDatabaseHas('users', [
+                'name' => 'update',
+            ]);
+    }
+
+    public function test_値が正しくない場合、ユーザー情報の更新ができない()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->post(route('user.update'),[
+                'id' => $user->id,
+                'name' => '',
+                'profile_img' => '',
+                'introduction' => 'update-introduction',
+            ]);
+        $this->assertDatabaseMissing('users', [
+            'introduction' => 'update-introduction',
+        ]);
+    }
 }
