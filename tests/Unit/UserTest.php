@@ -83,6 +83,7 @@ class UserTest extends TestCase
         $response->assertSessionHasErrors(['email']);
     }
 
+    #フォロー機能のためのメソッドテスト
     public function test_既にフォローをしている()
     {
         $user = User::factory()->create();
@@ -98,7 +99,7 @@ class UserTest extends TestCase
         $this->assertTrue($followed->followed_by());
     }
 
-    public function test_フォローをまだしていない()
+    public function test_まだフォローをしていない()
     {
         $user = User::factory()->create();
         $followed = User::factory()->create([

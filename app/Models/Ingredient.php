@@ -11,7 +11,7 @@ class Ingredient extends Model
     
     protected $guarded = array('id');
     public static $rules = array(
-        'content' => 'required|max:20',
+        'content' => 'required|max:10',
         'amount' => 'required|max:10'
     );
 
