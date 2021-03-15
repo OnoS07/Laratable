@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Recipe;
+use App\Services\TopService;
 
 class TopController extends Controller
 {
+    public function __construct(TopService $service)
+    {
+        $this->service = $service;    
+    }
+
     public function main()
     {
-        $recipes = Recipe::where('recipe_status', 'open')->inRandomOrder()->take(3)->get();
-        return view('top.main', ['recipes'=>$recipes]);
+        return view('top.main', $this->service->TopRecipeIndex());
     }
 
     public function about()

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Recipe extends Model
 {
@@ -56,5 +57,42 @@ class Recipe extends Model
       } else {
         return false;
       }
+    }
+
+    /**
+     * 公開済みのレシピをランダムに取得
+     * 
+     * @params itn $count
+     * 
+     * @return stdClass
+     */
+    public function getOpenRecipe(int $count)
+    {
+      $sql = <<< 'SQL'
+      SELECT
+        R.*,
+        U.name as user_name,
+        COALESCE((
+          SELECT COUNT(*)
+          FROM recipes as R
+          JOIN comments as Co
+            ON R.id = Co.recipe_id
+          GROUP BY R.id
+        ), 0) as comments,
+        COALESCE((
+          SELECT COUNT(*)
+          FROM recipes as R
+          JOIN favorites as F
+            ON R.id = F.recipe_id
+          GROUP BY R.id
+        ), 0) as favorites
+      FROM recipes AS R
+      LEFT JOIN users as U
+        ON R.user_id = U.id
+      WHERE R.recipe_status = 'open'
+      SQL;
+
+      return DB::table(DB::raw("({$sql})"))
+        ->inRandomOrder()->take($count)->get();
     }
 }
