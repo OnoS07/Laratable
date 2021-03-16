@@ -23,7 +23,7 @@
             <div class="recipe-contents"  style="padding-top: 20px">
                 @foreach($recipes as $recipe)
 					<div class="recipe-content">
-                        <a href="{{route('recipe.show', ['id' => $recipe])}}" class="recipe-select">
+                        <a href="{{route('recipe.show', ['id' => $recipe->id])}}" class="recipe-select">
                             <div style="position: relative;">
                                 @if($recipe->recipe_img)
                                     <img src="{{ asset('storage/'.$recipe->recipe_img)}}" class="recipe-image">
@@ -43,15 +43,15 @@
 							<span>
                                 <a href="{{route('user.show', ['id' => $recipe->user_id])}}">
 									<i class="fas fa-user" style="color: #F96167"></i>
-									<span style="color: black">{{$recipe->user->name}}</span>
+									<span style="color: black">{{$recipe->user_name}}</span>
                                 </a>
                                 <span style="margin: 0 30px;">
                                     <i class="fas fa-comment" style="color: #F96167;"></i>
-                                        <span style="color: black">{{count($recipe->comments)}}件</span>
+                                        <span style="color: black">{{$recipe->comments}}件</span>
                                 </span>
                                 <i class="fas fa-heart" style="color: #F96167"></i>
                                 <span style="color:black">
-                                    {{count($recipe->favorites)}}
+                                    {{$recipe->favorites}}
                                 </span>
                                 <i class="fas fa-paw", style="color: #F96167; margin-left: 30px;"></i>
                                     {{$recipe->view_count}}

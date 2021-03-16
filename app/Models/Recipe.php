@@ -4,21 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 
 class Recipe extends Model
 {
     use HasFactory;
     
     protected $guarded = array('id');
-
-    public static $rules = array(
-        'title' => 'required|max:30',
-        'introduction' => 'required|max:200',
-        'amount' => 'required|max:10'
-    );
 
     public function ingredients(){
         return $this->hasMany('App\Models\Ingredient');
@@ -60,6 +54,33 @@ class Recipe extends Model
     }
 
     /**
+     * 公開済みのレシピ取得用SQL
+     */
+    public $openRecipe_sql = <<< 'SQL'
+    SELECT
+      R.*,
+      U.name as user_name,
+      COALESCE((
+        SELECT COUNT(*)
+        FROM recipes as R
+        JOIN comments as Co
+          ON R.id = Co.recipe_id
+        GROUP BY R.id
+      ), 0) as comments,
+      COALESCE((
+        SELECT COUNT(*)
+        FROM recipes as R
+        JOIN favorites as F
+          ON R.id = F.recipe_id
+        GROUP BY R.id
+      ), 0) as favorites
+    FROM recipes AS R
+    LEFT JOIN users as U
+      ON R.user_id = U.id
+    WHERE R.recipe_status = 'open'
+    SQL;
+
+    /**
      * 公開済みのレシピをランダムに取得
      * 
      * @params itn $count
@@ -68,31 +89,62 @@ class Recipe extends Model
      */
     public function getOpenRecipe(int $count)
     {
-      $sql = <<< 'SQL'
-      SELECT
-        R.*,
-        U.name as user_name,
-        COALESCE((
-          SELECT COUNT(*)
-          FROM recipes as R
-          JOIN comments as Co
-            ON R.id = Co.recipe_id
-          GROUP BY R.id
-        ), 0) as comments,
-        COALESCE((
-          SELECT COUNT(*)
-          FROM recipes as R
-          JOIN favorites as F
-            ON R.id = F.recipe_id
-          GROUP BY R.id
-        ), 0) as favorites
-      FROM recipes AS R
-      LEFT JOIN users as U
-        ON R.user_id = U.id
-      WHERE R.recipe_status = 'open'
-      SQL;
-
+      $sql = $this->openRecipe_sql;
       return DB::table(DB::raw("({$sql})"))
         ->inRandomOrder()->take($count)->get();
     }
+
+    /**
+     * 公開済みのレシピ一覧を取得
+     * 
+     * @params itn $count
+     * 
+     * @return stdClass
+     */
+    public function getIndexRecipe(){
+      $sql = $this->openRecipe_sql;
+      return DB::table(DB::raw("({$sql})"))
+        ->get();
+    }
+
+    /**
+     * 検索されたタグに基づく公開済みのレシピ一覧を取得
+     * 
+     * @params string $tag
+     * 
+     * @return stdClass
+     */
+    public function getTagRecipeIndex(string $tag){
+        $recipe_tags = DB::table('recipe_tags')->where('tag_name',$tag);
+        $recipe_tag_ids = $recipe_tags->pluck('recipe_id');
+        $sql = $this->openRecipe_sql;
+        return DB::table(DB::raw("({$sql})"))
+          ->whereIn('id',$recipe_tag_ids)->where('recipe_status', 'open')->get();
+    }
+
+    /**
+     * 検索されたワードに基づく公開済みのレシピ一覧を取得
+     * 
+     * @params string $tag
+     * 
+     * @return stdClass
+     */
+    public function getSearchRecipeIndex(string $word){
+      $sql = $this->openRecipe_sql;
+
+      return DB::table(DB::raw("({$sql})"))
+      ->where('title', 'LIKE', "%{$word}%")->orWhere('introduction', 'LIKE', "%{$word}%")
+      /**
+       * #orWherehasはORM専用なのでクエリビルダでは使えず
+       * #ネスト先の材料に検索ワードが入っているレシピを取得
+          ->orWherehas('ingredients', function($query) use($word){
+              $query->where('content', 'LIKE', "%{$word}%");
+          })
+          #ネスト先のタグに検索ワードが入っているレシピを取得
+          ->orWherehas('recipe_tags', function($query) use($word){
+              $query->where('tag_name', 'LIKE', "%{$word}%");
+          })
+       */
+      ->get();
+  }
 }

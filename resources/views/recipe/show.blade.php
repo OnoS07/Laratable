@@ -43,7 +43,7 @@
                 @foreach($recipe->recipe_tags as $tag)
                     <form action="{{route('recipe.index')}}" method="get">
                         @csrf
-                        <input type="hidden" name="serch_tag" value="{{$tag->tag_name}}">
+                        <input type="hidden" name="search_tag" value="{{$tag->tag_name}}">
                         <input type="submit" class="recipe-tag" value="{{$tag->tag_name}}" style="border: none;">
                     </form>
                 @endforeach
